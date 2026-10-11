@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AgentSkillDeck: open plugins and skills for coding agents</title>
+<meta name="description" content="Open plugins and skills for coding agents. ui designs, reviews and matches interfaces; audio makes finished multi-voice audio on your own machine.">
+<meta property="og:title" content="AgentSkillDeck">
+<meta property="og:description" content="Open plugins and skills for coding agents.">
+<meta property="og:image" content="https://agentskilldeck.github.io/brand/social-preview.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="brand/logo-mark.svg" type="image/svg+xml">
+<style>
+  :root { --ink:#0b0f17; --panel:#111827; --line:#1f2937; --text:#f3f4f6; --muted:#9ca3af; --dim:#6b7280; --spark:#ffb224; --deck:#6077a8; }
+  * { box-sizing:border-box; }
+  html { scroll-behavior:smooth; }
+  body { margin:0; background:var(--ink); color:var(--text); font:17px/1.6 -apple-system, "Segoe UI", "Helvetica Neue", Arial, sans-serif; }
+  a { color:var(--text); }
+  code, pre { font-family:ui-monospace, "SF Mono", Menlo, Consolas, monospace; }
+  .wrap { max-width:1080px; margin:0 auto; padding:0 24px; }
+  header { display:flex; align-items:center; justify-content:space-between; padding:20px 0; }
+  header nav a { color:var(--muted); text-decoration:none; margin-left:24px; font-size:15px; }
+  header nav a:hover { color:var(--text); }
+  .hero { padding:72px 0 56px; text-align:center; background:radial-gradient(900px 420px at 50% 30%, #16203a, transparent 70%); }
+  .hero img { width:min(560px, 90%); }
+  .hero p { color:var(--muted); font-size:21px; max-width:640px; margin:24px auto 32px; }
+  .cta { display:inline-block; background:var(--spark); color:var(--ink); font-weight:650; padding:12px 22px; border-radius:10px; text-decoration:none; }
+  .cta.ghost { background:none; color:var(--text); border:1px solid var(--line); margin-left:10px; }
+  section { padding:56px 0; border-top:1px solid var(--line); }
+  h2 { font-size:30px; letter-spacing:-0.01em; margin:0 0 8px; }
+  .lede { color:var(--muted); margin:0 0 28px; }
+  pre { background:var(--panel); border:1px solid var(--line); border-radius:12px; padding:18px 20px; overflow-x:auto; font-size:15px; line-height:1.7; }
+  pre .c { color:var(--dim); }
+  .grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(300px, 1fr)); gap:16px; }
+  .card { background:var(--panel); border:1px solid var(--line); border-radius:14px; padding:20px; }
+  .card .tag { font-size:12px; letter-spacing:.08em; text-transform:uppercase; color:var(--deck); font-weight:650; }
+  .card h3 { margin:6px 0 6px; font-size:19px; font-family:ui-monospace, "SF Mono", Menlo, monospace; }
+  .card p { margin:0; color:var(--muted); font-size:15px; }
+  .card q { display:block; margin-top:12px; color:var(--text); font-size:14px; quotes:"\201C" "\201D"; }
+  .videos { grid-template-columns:repeat(auto-fill, minmax(420px, 1fr)); }
+  @media (max-width:500px) { .videos { grid-template-columns:1fr; } }
+  video { width:100%; border-radius:12px; border:1px solid var(--line); background:#000; display:block; }
+  figcaption { color:var(--muted); font-size:14px; margin-top:8px; }
+  footer { border-top:1px solid var(--line); padding:32px 0 48px; color:var(--dim); font-size:14px; }
+  @media (max-width:600px) { header nav a:not(:last-child) { display:none; } .cta.ghost { margin:12px 0 0; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <img src="brand/logo-mark.svg" alt="AgentSkillDeck" width="44" height="40">
+    <nav><a href="#install">Install</a><a href="#skills">Skills</a><a href="#listen">Listen</a><a href="https://github.com/AgentSkillDeck/agentskilldeck">GitHub</a></nav>
+  </header>
+</div>
+
+<div class="hero">
+  <div class="wrap">
+    <h1 style="margin:0"><img src="brand/wordmark-dark.svg" alt="AgentSkillDeck"></h1>
+    <p>Open plugins and skills for coding agents. Design interfaces that look like your product, and make finished multi-voice audio on your own machine.</p>
+    <a class="cta" href="#install">Install in two commands</a><a class="cta ghost" href="https://github.com/AgentSkillDeck/agentskilldeck">View on GitHub</a>
+  </div>
+</div>
+
+<div class="wrap">
+  <section id="install">
+    <h2>Install</h2>
+    <p class="lede">Add the marketplace once inside Claude Code, then install the plugins you want.</p>
+<pre><span class="c"># add the deck</span>
+/plugin marketplace add AgentSkillDeck/agentskilldeck
+<span class="c"># pick your plugins</span>
+/plugin install ui@agentskilldeck
+/plugin install audio@agentskilldeck</pre>
+    <p class="lede">Or install a single skill with the <code>skills</code> CLI: <code>npx skills add AgentSkillDeck/agentskilldeck --skill deck-design</code>. Needs Node 18+; audio also needs Python 3.10+ and ffmpeg.</p>
+  </section>
+
+  <section id="skills">
+    <h2>Seven skills, two plugins</h2>
+    <p class="lede">Every skill is plain Markdown plus small dependency-free scripts. No account, no server, no telemetry.</p>
+    <div class="grid">
+      <div class="card"><span class="tag">ui</span><h3>deck-design</h3><p>Design, build, redesign or polish web, iOS and Android interfaces.</p><q>Redesign our billing settings page so the current plan and invoices are easy to scan.</q></div>
+      <div class="card"><span class="tag">ui</span><h3>deck-review</h3><p>Critique, audit or gate a built interface before it ships.</p><q>Review the onboarding flow before we ship. Is it ready, and does it look generic?</q></div>
+      <div class="card"><span class="tag">ui</span><h3>deck-radar</h3><p>Answer one UI question with evidence from established design systems.</p><q>How do design systems handle a destructive confirmation dialog?</q></div>
+      <div class="card"><span class="tag">ui</span><h3>deck-match</h3><p>Recreate a screenshot or mockup as a 1:1 working UI.</p><q>Build this screenshot as a React page and match it exactly.</q></div>
+      <div class="card"><span class="tag">audio</span><h3>deck-script</h3><p>Write scripts for the ear: narration, lessons, podcasts, drama, ads, meditations.</p><q>Turn this article into a 60-second narration for a calm female voice.</q></div>
+      <div class="card"><span class="tag">audio</span><h3>deck-voice</h3><p>Render on-device: casting, emotions, QA, mix, captions, and your own voice.</p><q>Make an audiobook of chapter one with a different voice for Holmes.</q></div>
+      <div class="card"><span class="tag">audio</span><h3>deck-mix</h3><p>Find licensed sound, place cues, remix and re-master.</p><q>Add rain behind the second scene and duck the music under the voices.</q></div>
+    </div>
+  </section>
+
+  <section id="listen">
+    <h2>Listen</h2>
+    <p class="lede">Rendered by the audio plugin from the example scripts, unedited, each through the QA gate.</p>
+    <div class="grid videos">
+      <figure style="margin:0"><video controls preload="metadata" src="media/lighthouse.mp4#t=2"></video><figcaption><strong>The Lighthouse</strong>: audio drama with storm and sea (1:09)</figcaption></figure>
+      <figure style="margin:0"><video controls preload="metadata" src="media/bedtime.mp4#t=2"></video><figcaption><strong>Pip and the Lantern Bug</strong>: bedtime story for kids (1:10)</figcaption></figure>
+      <figure style="margin:0"><video controls preload="metadata" src="media/audiobook.mp4#t=2"></video><figcaption><strong>A Study in Scarlet</strong>: audiobook excerpt, ACX-mastered (1:29)</figcaption></figure>
+      <figure style="margin:0"><video controls preload="metadata" src="media/languages.mp4#t=2"></video><figcaption><strong>One voice, six languages</strong>: en, es, fr, hi, ja, ko (0:50)</figcaption></figure>
+    </div>
+    <p class="lede" style="margin-top:24px">All eight examples, with scripts and credits, are in <a href="https://github.com/AgentSkillDeck/agentskilldeck/tree/main/plugins/audio/examples">plugins/audio/examples</a>.</p>
+  </section>
+</div>
+
+<footer>
+  <div class="wrap">Apache-2.0 · <a href="https://github.com/AgentSkillDeck/agentskilldeck">AgentSkillDeck on GitHub</a> · Credits and third-party licences in <a href="https://github.com/AgentSkillDeck/agentskilldeck/blob/main/NOTICE">NOTICE</a></div>
+</footer>
+</body>
+</html>
