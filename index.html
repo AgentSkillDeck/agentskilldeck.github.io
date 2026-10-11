@@ -81,23 +81,34 @@
 
   /* the fan */
   .fan { position:relative; height:470px; }
-  .pcard { position:absolute; left:50%; bottom:30px; width:210px; height:290px; margin-left:-105px; border-radius:18px; background:var(--card); color:var(--card-ink);
-    box-shadow:0 24px 48px -18px rgba(0,0,0,.7), 0 0 0 1px rgba(0,0,0,.08) inset; transform-origin:50% 165%; padding:18px 18px 16px; display:flex; flex-direction:column;
-    transition:transform .5s cubic-bezier(.2,.8,.2,1), box-shadow .3s; text-decoration:none; }
-  .pcard .suit { display:flex; justify-content:space-between; align-items:center; font:700 11px/1 var(--sans); letter-spacing:.12em; text-transform:uppercase; }
-  .pcard .suit.rev { flex-direction:row-reverse; }
-  .pcard .suit span { font-family:var(--mono); letter-spacing:.02em; text-transform:none; font-size:13px; }
-  .pcard .suit i { font-style:normal; padding:5px 8px; border-radius:6px; color:#fff; }
-  .pcard.ui .suit i { background:var(--deck); }
-  .pcard.audio .suit i { background:#7a4e12; }
-  .pcard .glyph { flex:1; display:grid; place-items:center; }
-  .pcard .glyph svg { width:74px; height:74px; }
-  .pcard h3 { margin:0; font:700 19px/1.2 var(--mono); letter-spacing:-.01em; }
-  .pcard p { margin:6px 0 0; font-size:13.5px; line-height:1.4; color:var(--card-muted); }
-  .pcard:hover { box-shadow:0 34px 60px -18px rgba(0,0,0,.85), 0 0 0 2px var(--spark) inset; }
+  .pcard { all:unset; box-sizing:border-box; position:absolute; left:50%; bottom:30px; width:226px; height:316px; margin-left:-113px; border-radius:16px; background:var(--card); color:var(--card-ink); cursor:pointer;
+    box-shadow:0 24px 48px -18px rgba(0,0,0,.7), 0 0 0 1px rgba(0,0,0,.08) inset; transform-origin:50% 165%; padding:40px 30px 44px; display:flex; flex-direction:column; align-items:center; text-align:center;
+    transition:transform .5s cubic-bezier(.2,.8,.2,1), box-shadow .3s; font-family:var(--sans); }
+  .pcard::before { content:""; position:absolute; inset:9px; border:1px solid rgba(17,24,39,.12); border-radius:10px; pointer-events:none; }
+  .pcard.ui { --suit:#2f3f68; } .pcard.audio { --suit:#c2410c; }
+  .pcard.audio::before { border-color:rgba(194,65,12,.22); } .pcard.ui::before { border-color:rgba(47,63,104,.2); }
+  .idx { position:absolute; top:15px; left:16px; display:flex; flex-direction:row; align-items:center; gap:5px; line-height:1; color:var(--suit); }
+  .idx b { font:800 13px/1 var(--mono); letter-spacing:-.01em; }
+  .idx i { font-style:normal; font-size:13px; }
+  .pcard.rev .idx:not(.bottom) { flex-direction:row-reverse; }
+  .idx.bottom { top:auto; left:auto; bottom:14px; right:15px; transform:rotate(180deg); }
+  .pcard.rev .idx { left:auto; right:15px; } .pcard.rev .idx.bottom { right:auto; left:15px; }
+  .pcard .glyph { flex:1; display:grid; place-items:center; color:var(--suit); }
+  .pcard .glyph svg { width:70px; height:70px; stroke:currentColor; }
+  .pcard h3 { margin:0; font:700 17px/1.2 var(--mono); letter-spacing:-.01em; }
+  .pcard p { margin:5px 0 0; font-size:13px; line-height:1.35; color:var(--card-muted); }
+  .cmd { margin-top:12px; font-size:11.5px !important; display:inline-flex; align-items:center; gap:6px; font:600 12px var(--mono); color:var(--suit); background:rgba(17,24,39,.06); border:1px dashed color-mix(in srgb, var(--suit) 45%, transparent); border-radius:8px; padding:5px 9px; }
+  .cmd code { all:unset; }
+  .cmd svg { width:13px; height:13px; fill:none; stroke:currentColor; stroke-width:2; }
+  .pcard:hover, .pcard:focus-visible { box-shadow:0 34px 60px -18px rgba(0,0,0,.85), 0 0 0 2px var(--spark) inset; }
+  .pcard.copied .cmd { color:#166534; border-color:#16a34a; border-style:solid; background:#dcfce7; }
   .fan .pcard { transform:rotate(var(--rot)) translateY(var(--lift, 0)); }
-  @media (hover:hover) { .fan .pcard:hover { --lift:-26px; z-index:10 !important; } .fan .pcard:hover h3, .fan .pcard:hover p { opacity:1; } }
-  .fan .pcard:not(.front) h3, .fan .pcard:not(.front) p { opacity:0; transition:opacity .25s; }
+  .fan .pcard:not(.front) h3, .fan .pcard:not(.front) p, .fan .pcard:not(.front) .cmd { opacity:0; transition:opacity .25s; }
+  @media (hover:hover) { .fan .pcard:hover, .fan .pcard:focus-visible { --lift:-26px; z-index:10 !important; } .fan .pcard:hover h3, .fan .pcard:hover p, .fan .pcard:hover .cmd, .fan .pcard:focus-visible h3, .fan .pcard:focus-visible p, .fan .pcard:focus-visible .cmd { opacity:1; } }
+  .toast { position:fixed; left:50%; bottom:24px; transform:translate(-50%, 20px); opacity:0; pointer-events:none; z-index:50; background:var(--card); color:var(--card-ink); border-radius:12px; padding:11px 16px; font-size:14.5px; box-shadow:0 20px 40px -12px rgba(0,0,0,.7); transition:opacity .2s, transform .2s; display:flex; gap:12px; align-items:center; white-space:nowrap; }
+  .toast.show { opacity:1; transform:translate(-50%, 0); pointer-events:auto; }
+  .toast code { background:#e5e7eb; border:0; color:var(--card-ink); }
+  .toast a { color:var(--deck); font-weight:650; }
   @media (prefers-reduced-motion:no-preference) {
     .js .fan:not(.dealt) .pcard { transform:rotate(0deg) translateY(20px); }
   }
@@ -115,6 +126,7 @@
   .skill header { display:flex; align-items:center; gap:12px; }
   .skill header .ico { width:40px; height:40px; border-radius:10px; display:grid; place-items:center; background:var(--card); color:var(--card-ink); flex:none; }
   .skill header .ico svg { width:22px; height:22px; }
+  #audio .skill header .ico { color:#c2410c; } #ui .skill header .ico { color:#2f3f68; }
   .skill h3 { margin:0; font:700 18px var(--mono); }
   .skill .what { color:var(--muted); margin:0; font-size:15.5px; }
   .say { position:relative; background:var(--panel-2); border:1px solid var(--line-2); border-radius:14px 14px 14px 4px; padding:12px 14px 12px 40px; font-size:15px; }
@@ -190,9 +202,11 @@
     .now span { white-space:normal; }
     .fan { height:300px; }
     .fan .pcard { transform:rotate(calc(var(--rot) * .62)) translateY(var(--lift, 0)); }
-    .pcard { width:150px; height:210px; margin-left:-75px; padding:12px; border-radius:14px; }
+    .pcard { width:150px; height:214px; margin-left:-75px; padding:30px 12px 32px; border-radius:13px; }
+    .idx { top:11px; left:11px; } .idx.bottom { bottom:11px; right:11px; } .pcard.rev .idx { right:11px; } .pcard.rev .idx.bottom { left:11px; }
+    .idx b { font-size:11px; } .cmd { font-size:10px !important; padding:4px 6px; margin-top:8px; white-space:nowrap; } .cmd svg { display:none; }
     .pcard .glyph svg { width:48px; height:48px; }
-    .pcard h3 { font-size:14px; }
+    .pcard h3 { font-size:13px; }
     .pcard p { display:none; }
     section { padding:72px 0; }
     .principles { grid-template-columns:1fr; }
@@ -233,13 +247,13 @@
     </div>
 
     <div class="fan" id="fan" aria-label="The seven skills">
-      <a class="pcard audio" href="#deck-mix" style="--rot:-30deg;z-index:1"><div class="suit"><span>mix</span> <i>audio</i></div><div class="glyph"><svg viewBox="0 0 24 24" fill="none" stroke="#7a4e12" stroke-width="1.6" stroke-linecap="round"><path d="M4 6v12M9 9v6M14 4v16M19 8v8"/></svg></div><h3>deck-mix</h3><p>Licensed sound, cues and mastering</p></a>
-      <a class="pcard audio" href="#deck-voice" style="--rot:-20deg;z-index:2"><div class="suit"><span>voice</span> <i>audio</i></div><div class="glyph"><svg viewBox="0 0 24 24" fill="none" stroke="#7a4e12" stroke-width="1.6" stroke-linecap="round"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0014 0M12 18v3"/></svg></div><h3>deck-voice</h3><p>On-device voices, QA and captions</p></a>
-      <a class="pcard audio" href="#deck-script" style="--rot:-10deg;z-index:3"><div class="suit"><span>script</span> <i>audio</i></div><div class="glyph"><svg viewBox="0 0 24 24" fill="none" stroke="#7a4e12" stroke-width="1.6" stroke-linecap="round"><path d="M6 3h9l3 3v15H6z"/><path d="M9 10h6M9 14h6M9 18h3"/></svg></div><h3>deck-script</h3><p>Scripts written for the ear</p></a>
-      <a class="pcard ui" href="#deck-match" style="--rot:30deg;z-index:1"><div class="suit rev"><span>match</span> <i>ui</i></div><div class="glyph"><svg viewBox="0 0 24 24" fill="none" stroke="#3d4e78" stroke-width="1.6" stroke-linecap="round"><rect x="3" y="4" width="8" height="16" rx="1.5"/><rect x="13" y="4" width="8" height="16" rx="1.5"/><path d="M11 12h2"/></svg></div><h3>deck-match</h3><p>Screenshot to a 1:1 working UI</p></a>
-      <a class="pcard ui" href="#deck-radar" style="--rot:10deg;z-index:3"><div class="suit rev"><span>radar</span> <i>ui</i></div><div class="glyph"><svg viewBox="0 0 24 24" fill="none" stroke="#3d4e78" stroke-width="1.6" stroke-linecap="round"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="4"/><path d="M12 12l5-5"/></svg></div><h3>deck-radar</h3><p>Evidence from real design systems</p></a>
-      <a class="pcard ui" href="#deck-review" style="--rot:20deg;z-index:2"><div class="suit rev"><span>review</span> <i>ui</i></div><div class="glyph"><svg viewBox="0 0 24 24" fill="none" stroke="#3d4e78" stroke-width="1.6" stroke-linecap="round"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg></div><h3>deck-review</h3><p>A ship gate for built interfaces</p></a>
-      <a class="pcard ui front" href="#deck-design" style="--rot:0deg;z-index:4"><div class="suit"><span>design</span> <i>ui</i></div><div class="glyph"><svg viewBox="0 0 24 24" fill="none" stroke="#3d4e78" stroke-width="1.6" stroke-linecap="round"><path d="M12 3l2.6 6.4L21 12l-6.4 2.6L12 21l-2.6-6.4L3 12l6.4-2.6z"/></svg></div><h3>deck-design</h3><p>Design that looks like your product</p></a>
+      <button type="button" class="pcard audio" data-cmd="/audio:deck-mix" data-target="#deck-mix" style="--rot:-30deg;z-index:1" aria-label="Copy /audio:deck-mix (Licensed sound, cues and mastering)"><span class="idx" aria-hidden="true"><b>mix</b><i>♫</i></span><div class="glyph"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round"><path d="M4 6v12M9 9v6M14 4v16M19 8v8"/></svg></div><h3>deck-mix</h3><p>Licensed sound, cues and mastering</p><span class="cmd"><code>/audio:deck-mix</code><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 012-2h10"/></svg></span><span class="idx bottom" aria-hidden="true"><b>mix</b><i>♫</i></span></button>
+      <button type="button" class="pcard audio" data-cmd="/audio:deck-voice" data-target="#deck-voice" style="--rot:-20deg;z-index:2" aria-label="Copy /audio:deck-voice (On-device voices, QA and captions)"><span class="idx" aria-hidden="true"><b>voice</b><i>♫</i></span><div class="glyph"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0014 0M12 18v3"/></svg></div><h3>deck-voice</h3><p>On-device voices, QA and captions</p><span class="cmd"><code>/audio:deck-voice</code><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 012-2h10"/></svg></span><span class="idx bottom" aria-hidden="true"><b>voice</b><i>♫</i></span></button>
+      <button type="button" class="pcard audio" data-cmd="/audio:deck-script" data-target="#deck-script" style="--rot:-10deg;z-index:3" aria-label="Copy /audio:deck-script (Scripts written for the ear)"><span class="idx" aria-hidden="true"><b>script</b><i>♫</i></span><div class="glyph"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round"><path d="M6 3h9l3 3v15H6z"/><path d="M9 10h6M9 14h6M9 18h3"/></svg></div><h3>deck-script</h3><p>Scripts written for the ear</p><span class="cmd"><code>/audio:deck-script</code><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 012-2h10"/></svg></span><span class="idx bottom" aria-hidden="true"><b>script</b><i>♫</i></span></button>
+      <button type="button" class="pcard ui rev" data-cmd="/ui:deck-match" data-target="#deck-match" style="--rot:30deg;z-index:1" aria-label="Copy /ui:deck-match (Screenshot to a 1:1 working UI)"><span class="idx" aria-hidden="true"><b>match</b><i>◆</i></span><div class="glyph"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round"><rect x="3" y="4" width="8" height="16" rx="1.5"/><rect x="13" y="4" width="8" height="16" rx="1.5"/><path d="M11 12h2"/></svg></div><h3>deck-match</h3><p>Screenshot to a 1:1 working UI</p><span class="cmd"><code>/ui:deck-match</code><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 012-2h10"/></svg></span><span class="idx bottom" aria-hidden="true"><b>match</b><i>◆</i></span></button>
+      <button type="button" class="pcard ui rev" data-cmd="/ui:deck-radar" data-target="#deck-radar" style="--rot:10deg;z-index:3" aria-label="Copy /ui:deck-radar (Evidence from real design systems)"><span class="idx" aria-hidden="true"><b>radar</b><i>◆</i></span><div class="glyph"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="4"/><path d="M12 12l5-5"/></svg></div><h3>deck-radar</h3><p>Evidence from real design systems</p><span class="cmd"><code>/ui:deck-radar</code><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 012-2h10"/></svg></span><span class="idx bottom" aria-hidden="true"><b>radar</b><i>◆</i></span></button>
+      <button type="button" class="pcard ui rev" data-cmd="/ui:deck-review" data-target="#deck-review" style="--rot:20deg;z-index:2" aria-label="Copy /ui:deck-review (A ship gate for built interfaces)"><span class="idx" aria-hidden="true"><b>review</b><i>◆</i></span><div class="glyph"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg></div><h3>deck-review</h3><p>A ship gate for built interfaces</p><span class="cmd"><code>/ui:deck-review</code><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 012-2h10"/></svg></span><span class="idx bottom" aria-hidden="true"><b>review</b><i>◆</i></span></button>
+      <button type="button" class="pcard ui front" data-cmd="/ui:deck-design" data-target="#deck-design" style="--rot:0deg;z-index:4" aria-label="Copy /ui:deck-design (Design that looks like your product)"><span class="idx" aria-hidden="true"><b>design</b><i>◆</i></span><div class="glyph"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round"><path d="M12 3l2.6 6.4L21 12l-6.4 2.6L12 21l-2.6-6.4L3 12l6.4-2.6z"/></svg></div><h3>deck-design</h3><p>Design that looks like your product</p><span class="cmd"><code>/ui:deck-design</code><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 012-2h10"/></svg></span><span class="idx bottom" aria-hidden="true"><b>design</b><i>◆</i></span></button>
     </div>
   </div>
 </div>
@@ -443,6 +457,8 @@
 </section>
 </main>
 
+<div class="toast" id="toast" role="status" aria-live="polite"><span id="toast-msg"></span><a id="toast-link" href="#">See details</a></div>
+
 <footer>
   <div class="wrap">
     <span>AgentSkillDeck · Apache-2.0</span>
@@ -461,6 +477,21 @@
     try { await navigator.clipboard.writeText(b.dataset.copy); b.textContent = 'Copied'; b.classList.add('done'); }
     catch { b.textContent = 'Select and copy'; }
     setTimeout(() => { b.textContent = 'Copy'; b.classList.remove('done'); }, 1800);
+  }));
+
+
+  const toast = document.getElementById('toast');
+  let toastTimer;
+  document.querySelectorAll('.pcard').forEach((c) => c.addEventListener('click', async () => {
+    const cmd = c.dataset.cmd;
+    let ok = true;
+    try { await navigator.clipboard.writeText(cmd); } catch { ok = false; }
+    document.getElementById('toast-msg').innerHTML = ok ? `Copied <code>${cmd}</code>. Paste it into Claude Code.` : `Type <code>${cmd}</code> in Claude Code.`;
+    document.getElementById('toast-link').href = c.dataset.target;
+    toast.classList.add('show');
+    c.classList.add('copied');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => { toast.classList.remove('show'); c.classList.remove('copied'); }, 2600);
   }));
 
   const player = document.getElementById('player');
