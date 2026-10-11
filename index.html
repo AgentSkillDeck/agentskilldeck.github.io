@@ -213,6 +213,7 @@
   .btn { display:inline-flex; align-items:center; gap:8px; padding:12px 20px; border-radius:12px; font-weight:650; text-decoration:none; }
   .btn.primary { background:var(--spark); color:var(--spark-ink); }
   .btn.ghost { border:1px solid var(--line-2); }
+  footer a#versions { color:var(--muted); text-decoration:none; font-family:var(--mono); font-size:13px; } footer a#versions:hover { color:var(--text); }
   footer { border-top:1px solid var(--line); padding:32px 0 48px; color:var(--dim); font-size:14px; }
   footer .wrap { display:flex; justify-content:space-between; gap:16px; flex-wrap:wrap; }
 
@@ -499,7 +500,7 @@
 
 <footer>
   <div class="wrap">
-    <span>AgentSkillDeck · Apache-2.0</span>
+    <span>AgentSkillDeck · Apache-2.0 · <a id="versions" href="https://github.com/AgentSkillDeck/skills/blob/main/.claude-plugin/marketplace.json">ui <span data-v="ui">v0.2.1</span> · audio <span data-v="audio">v0.1.1</span></a></span>
     <span>Credits and third-party licences in <a href="https://github.com/AgentSkillDeck/skills/blob/main/NOTICE">NOTICE</a></span>
   </div>
 </footer>
@@ -542,6 +543,16 @@
     clearTimeout(toastTimer);
     toastTimer = setTimeout(() => { toast.classList.remove('show'); c.classList.remove('copied'); }, 2600);
   }));
+
+
+  // Show the plugin versions from the live marketplace file; the static text is the fallback.
+  fetch('https://raw.githubusercontent.com/AgentSkillDeck/skills/main/.claude-plugin/marketplace.json', { cache: 'no-store' })
+    .then((r) => (r.ok ? r.json() : null))
+    .then((m) => (m?.plugins ?? []).forEach((p) => {
+      const el = document.querySelector(`[data-v="${p.name}"]`);
+      if (el && /^\d+\.\d+\.\d+$/.test(p.version)) el.textContent = `v${p.version}`;
+    }))
+    .catch(() => {});
 
   const player = document.getElementById('player');
   document.querySelectorAll('.track').forEach((t) => t.addEventListener('click', () => {
