@@ -1,0 +1,227 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Keepwatch: keep your Mac awake with the lid closed for Claude Code and AI agents</title>
+<meta name="description" content="Keepwatch is a free, open-source macOS menu-bar app that keeps your Mac awake while Claude Code, Codex and other AI agents run, even with the lid closed, then sleeps on schedule. Live mic and camera indicators, battery health, and a CLI for agents.">
+<link rel="canonical" href="https://agentskilldeck.github.io/keepwatch/">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="AgentSkillDeck">
+<meta property="og:url" content="https://agentskilldeck.github.io/keepwatch/">
+<meta property="og:title" content="Keepwatch: keep your Mac awake for AI agents, even with the lid closed">
+<meta property="og:description" content="Free, open-source macOS menu-bar app. Stays awake while Claude Code and Codex run, lid-closed sessions that sleep on schedule, live mic and camera indicators.">
+<meta property="og:image" content="https://agentskilldeck.github.io/keepwatch/img/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Keepwatch menu showing keep-awake controls, lid-closed sessions and mic and camera status">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Keepwatch: keep your Mac awake for AI agents">
+<meta name="twitter:description" content="Stays awake while Claude Code and Codex run, even with the lid closed, then sleeps on schedule. Free and open source.">
+<meta name="twitter:image" content="https://agentskilldeck.github.io/keepwatch/img/og.jpg">
+<meta name="theme-color" content="#0b0f17">
+<link rel="icon" href="img/icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="img/icon-256.png">
+<link rel="icon" href="img/icon-48.png" type="image/png" sizes="48x48">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "SoftwareApplication",
+      "@id": "https://agentskilldeck.github.io/keepwatch/#app",
+      "name": "Keepwatch",
+      "description": "A macOS menu-bar app that keeps your Mac awake while AI coding agents such as Claude Code and Codex run, including lid-closed sessions that go back to sleep on schedule, with live microphone and camera indicators and a command-line tool for agents.",
+      "applicationCategory": "UtilitiesApplication",
+      "operatingSystem": "macOS 14 or later",
+      "url": "https://agentskilldeck.github.io/keepwatch/",
+      "downloadUrl": "https://github.com/AgentSkillDeck/keepwatch/releases/latest",
+      "softwareVersion": "0.1.0",
+      "license": "https://www.apache.org/licenses/LICENSE-2.0",
+      "isAccessibleForFree": true,
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+      "image": "https://agentskilldeck.github.io/keepwatch/img/icon-256.png",
+      "screenshot": "https://agentskilldeck.github.io/keepwatch/img/dashboard-dark.jpg",
+      "codeRepository": "https://github.com/AgentSkillDeck/keepwatch",
+      "publisher": { "@id": "https://agentskilldeck.github.io/#org" },
+      "featureList": [
+        "Keep the Mac awake while Claude Code, Codex, Gemini CLI and other agent CLIs run",
+        "Lid-closed sessions that sleep N hours after the lid closes or at a set time",
+        "Never on battery by default, 12-hour hard cap, thermal cut-out",
+        "Live microphone and camera in-use indicators and which app uses the mic",
+        "Mute the mic when the lid closes",
+        "Battery health, cycle count and thermal state",
+        "Listening TCP ports with a confirmed stop",
+        "keepwatch CLI with JSON output and an agent skill"
+      ]
+    },
+    {
+      "@type": "Organization",
+      "@id": "https://agentskilldeck.github.io/#org",
+      "name": "AgentSkillDeck",
+      "url": "https://agentskilldeck.github.io/",
+      "logo": "https://agentskilldeck.github.io/brand/avatar.png",
+      "sameAs": ["https://github.com/AgentSkillDeck"]
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Can a MacBook keep running with the lid closed without an external display?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Not by default: closing the lid sleeps the Mac unless an external display, power and keyboard are attached. Keepwatch runs a lid-closed session: you enter your password once, it turns sleep off, and a small watchdog turns sleep back on and puts the Mac to sleep after the time you chose, at a set time, when your agents finish, or if the battery gets low." }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I keep my Mac awake while Claude Code or Codex is running?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Turn on 'While AI agents run' in Keepwatch, or run 'keepwatch awake --agents'. The Mac stays awake while Claude Code, Codex, Gemini CLI, Aider, OpenCode and other agent CLIs run, then sleeps normally two minutes after the last one exits. Agents can also wrap one command with 'keepwatch run -- <command>'." }
+        },
+        {
+          "@type": "Question",
+          "name": "Is it safe to keep a MacBook awake with the lid closed in a bag?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Heat in a closed bag is the main risk, so Keepwatch only runs lid-closed sessions on power by default, ends them on serious thermal pressure or low battery, caps every session at 12 hours, and checks on every launch that sleep was not left off." }
+        },
+        {
+          "@type": "Question",
+          "name": "How is Keepwatch different from caffeinate or Amphetamine?",
+          "acceptedAnswer": { "@type": "Answer", "text": "caffeinate cannot keep a Mac awake with the lid closed, and Amphetamine needs a separate helper for that. Keepwatch is built for AI agents: it knows when agent CLIs are running, ends lid sessions on its own, adds mic and camera indicators, and ships a CLI with JSON output that agents can call. It is free and open source under Apache-2.0." }
+        },
+        {
+          "@type": "Question",
+          "name": "Does Keepwatch need microphone or camera permission?",
+          "acceptedAnswer": { "@type": "Answer", "text": "No. It never records anything; it only asks macOS whether the microphone or camera is running. It needs no Full Disk Access, Accessibility or Screen Recording permission and makes no network requests." }
+        }
+      ]
+    }
+  ]
+}
+</script>
+<style>
+  :root { --ink:#0b0f17; --panel:#121a2a; --line:#222c40; --text:#f3f4f6; --muted:#a3acbd; --dim:#6f7a90; --teal:#2fe6cf; --teal-2:#14a9b8;
+          --mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace; --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif; }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--ink); color:var(--text); font:17px/1.6 var(--sans); -webkit-font-smoothing:antialiased; }
+  a { color:var(--teal); }
+  .wrap { max-width:1100px; margin:0 auto; padding:0 24px; }
+  header.nav { border-bottom:1px solid var(--line); }
+  header.nav .wrap { display:flex; align-items:center; justify-content:space-between; height:64px; }
+  header.nav a { color:var(--text); text-decoration:none; }
+  .brand { display:flex; align-items:center; gap:10px; font-weight:700; }
+  .brand img { width:28px; height:28px; }
+  .crumbs { color:var(--dim); font-size:14px; text-align:right; }
+  .hero { padding-top:72px; padding-bottom:40px; display:grid; grid-template-columns:1.1fr .9fr; gap:48px; align-items:center; }
+  .eyebrow { color:var(--teal); font:600 13px/1 var(--mono); letter-spacing:.08em; text-transform:uppercase; }
+  h1 { font-size:clamp(34px,5vw,56px); line-height:1.08; letter-spacing:-.02em; margin:14px 0 18px; }
+  h1 em { font-style:normal; color:var(--teal); }
+  h2 { font-size:clamp(26px,3.2vw,36px); letter-spacing:-.01em; margin:0 0 12px; }
+  h3 { margin:0 0 6px; font-size:19px; }
+  .lede { color:var(--muted); font-size:19px; max-width:640px; }
+  .btns { display:flex; gap:12px; flex-wrap:wrap; margin-top:26px; }
+  .btn { display:inline-flex; align-items:center; gap:8px; padding:12px 20px; border-radius:12px; font-weight:600; text-decoration:none; }
+  .btn.primary { background:var(--teal); color:#062521; }
+  .btn.ghost { border:1px solid var(--line); color:var(--text); }
+  .meta { display:flex; gap:16px; flex-wrap:wrap; color:var(--dim); font-size:14px; margin-top:18px; }
+  .shot { border-radius:16px; box-shadow:0 30px 80px rgba(0,0,0,.55); width:100%; height:auto; display:block; }
+  .hero > *, .two > *, .grid > * { min-width:0; }
+  code { overflow-wrap:anywhere; }
+  section { padding:56px 0; border-top:1px solid var(--line); }
+  .grid { display:grid; grid-template-columns:repeat(3,1fr); gap:18px; margin-top:28px; }
+  .card { background:var(--panel); border:1px solid var(--line); border-radius:14px; padding:20px; }
+  .card p { margin:0; color:var(--muted); font-size:16px; }
+  pre { background:#0f1522; border:1px solid var(--line); border-radius:12px; padding:18px 20px; overflow:auto; font:14px/1.7 var(--mono); color:#d7dcea; }
+  pre .c { color:var(--dim); }
+  .two { display:grid; grid-template-columns:1fr 1fr; gap:32px; align-items:start; }
+  details { background:var(--panel); border:1px solid var(--line); border-radius:12px; padding:14px 18px; margin:10px 0; }
+  summary { cursor:pointer; font-weight:600; }
+  details p { color:var(--muted); margin:10px 0 0; }
+  .note { color:var(--dim); font-size:14px; }
+  footer { border-top:1px solid var(--line); padding:28px 0; color:var(--dim); font-size:14px; }
+  @media (max-width: 860px) { .hero, .two { grid-template-columns:1fr; } .grid { grid-template-columns:1fr; } .hero { padding-top:40px; } .brand span { display:none; } }
+</style>
+</head>
+<body>
+<header class="nav">
+  <div class="wrap">
+    <a class="brand" href="/"><img src="/brand/logo-mark.svg" alt="" width="28" height="28"><span>AgentSkillDeck</span></a>
+    <nav class="crumbs"><a href="/">Plugins</a> · <a href="/keepwatch/" aria-current="page">Keepwatch</a> · <a href="https://github.com/AgentSkillDeck/keepwatch">GitHub</a></nav>
+  </div>
+</header>
+
+<main>
+<div class="wrap hero">
+  <div>
+    <span class="eyebrow">Free macOS app · open source</span>
+    <h1>Keep your Mac awake for AI agents, <em>even with the lid closed.</em></h1>
+    <p class="lede">Keepwatch is a menu-bar app for people who run Claude Code, Codex and other coding agents for hours. Your Mac stays awake exactly while they work. Close the lid and it keeps going, then goes back to sleep on schedule. It also keeps watch on your mic and camera.</p>
+    <div class="btns">
+      <a class="btn primary" href="https://github.com/AgentSkillDeck/keepwatch/releases/latest">Download for macOS</a>
+      <a class="btn ghost" href="https://github.com/AgentSkillDeck/keepwatch">View source on GitHub</a>
+    </div>
+    <div class="meta"><span>macOS 14 Sonoma or later</span><span>Apple Silicon and Intel</span><span>Apache-2.0</span><span>No account, no network, no telemetry</span></div>
+  </div>
+  <img class="shot" src="img/menu-dark.jpg" width="640" height="776" alt="The Keepwatch menu: battery, mic and camera status, keep-awake buttons, a 'While AI agents run' switch and lid-closed session controls">
+</div>
+
+<section id="features">
+  <div class="wrap">
+    <h2>Everything a laptop developer reaches for, in one menu</h2>
+    <p class="lede">No more choosing between a sleeping Mac that kills a three-hour agent run and a Mac left awake all night in your bag.</p>
+    <div class="grid">
+      <div class="card"><h3>Awake while agents run</h3><p>Detects Claude Code, Codex, Gemini CLI, Aider, OpenCode, Goose, Amp and more. Sleeps normally two minutes after the last one exits, and tells you when an agent finishes.</p></div>
+      <div class="card"><h3>Lid-closed sessions</h3><p>Keep working with the lid shut, then sleep three hours after the lid closes, at 1:00, or when agents finish. One password per session; a watchdog ends it even if the app quits.</p></div>
+      <div class="card"><h3>Safe by default</h3><p>Lid sessions run only on power unless you allow battery (then they stop at 20%). Thermal cut-out, 12-hour cap, and a check on every launch that sleep wasn't left off.</p></div>
+      <div class="card"><h3>Mic and camera watch</h3><p>Live indicators in the menu bar, which app is using your microphone, one-click mute, and mute when the lid closes. Keepwatch itself never records anything.</p></div>
+      <div class="card"><h3>Battery and power</h3><p>Battery health as a percentage of original capacity, cycle count, time left, Low Power Mode, thermal state, and who else is keeping your Mac awake.</p></div>
+      <div class="card"><h3>Developer extras</h3><p>See which of your processes are listening on which ports, and stop one with a confirmation. One-click Dock and Finder toggles, and links to every privacy pane.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="agents">
+  <div class="wrap two">
+    <div>
+      <h2>A command line your agents can use</h2>
+      <p class="lede">Install the <code>keepwatch</code> command from the dashboard. Agents get stable JSON and exit codes, and they can never start a lid session: that always needs your password.</p>
+      <p class="note">Add the agent skill so Claude Code and Codex know when to use it: <code>npx skills add AgentSkillDeck/keepwatch</code></p>
+    </div>
+<pre><span class="c"># stay awake exactly while a command runs</span>
+$ keepwatch run -- npm test
+
+<span class="c"># stay awake while any agent CLI runs</span>
+$ keepwatch awake --agents
+
+<span class="c"># power, sleep blockers, agents, mic/camera</span>
+$ keepwatch status --json
+
+<span class="c"># what's on :3000?</span>
+$ keepwatch ports</pre>
+  </div>
+</section>
+
+<section id="dashboard">
+  <div class="wrap">
+    <h2>The dashboard</h2>
+    <p class="lede">Every control in one window: stay awake, lid-closed sessions, privacy, battery and power, quick settings, listening ports and start at login.</p>
+    <img class="shot" src="img/dashboard-dark.jpg" width="1520" height="1440" loading="lazy" alt="Keepwatch dashboard with stay-awake, lid-closed session, privacy, battery and power, and quick settings cards">
+  </div>
+</section>
+
+<section id="faq">
+  <div class="wrap">
+    <h2>Questions</h2>
+    <details open><summary>Can a MacBook keep running with the lid closed without an external display?</summary><p>Not by default: closing the lid sleeps the Mac unless an external display, power and keyboard are attached. Keepwatch runs a lid-closed session: you enter your password once, it turns sleep off, and a small watchdog turns sleep back on and puts the Mac to sleep after the time you chose, at a set time, when your agents finish, or if the battery gets low.</p></details>
+    <details><summary>How do I keep my Mac awake while Claude Code or Codex is running?</summary><p>Turn on “While AI agents run” in Keepwatch, or run <code>keepwatch awake --agents</code>. The Mac stays awake while agent CLIs run, then sleeps normally two minutes after the last one exits. Agents can also wrap a single command with <code>keepwatch run -- &lt;command&gt;</code>.</p></details>
+    <details><summary>Is it safe to keep a MacBook awake with the lid closed in a bag?</summary><p>Heat in a closed bag is the main risk, so Keepwatch only runs lid-closed sessions on power by default, ends them on serious thermal pressure or low battery, caps every session at 12 hours, and checks on every launch that sleep was not left off.</p></details>
+    <details><summary>How is Keepwatch different from caffeinate or Amphetamine?</summary><p><code>caffeinate</code> can't keep a Mac awake with the lid closed, and Amphetamine needs a separate helper for that. Keepwatch is built for AI agents: it knows when agent CLIs are running, ends lid sessions on its own, adds mic and camera indicators, and ships a CLI with JSON output that agents can call. It's free and open source under Apache-2.0.</p></details>
+    <details><summary>Does Keepwatch need microphone or camera permission?</summary><p>No. It never records anything; it only asks macOS whether the microphone or camera is running. It needs no Full Disk Access, Accessibility or Screen Recording permission and makes no network requests.</p></details>
+    <p class="note">Lid-closed sessions are in beta. Read exactly what runs with administrator rights in <a href="https://github.com/AgentSkillDeck/keepwatch/blob/main/SECURITY.md">SECURITY.md</a>.</p>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">Keepwatch is part of <a href="/">AgentSkillDeck</a>, open plugins and tools for coding agents · Apache-2.0 · <a href="https://github.com/AgentSkillDeck/keepwatch">Source</a></div>
+</footer>
+</body>
+</html>
