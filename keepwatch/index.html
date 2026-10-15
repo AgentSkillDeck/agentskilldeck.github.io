@@ -63,6 +63,15 @@
       ]
     },
     {
+      "@type": "VideoObject",
+      "name": "Keepwatch in 85 seconds",
+      "description": "A narrated tour of Keepwatch: keep-awake times, agent sessions, lid-closed sessions, mic and camera privacy, security, battery, apps and the command line.",
+      "thumbnailUrl": "https://agentskilldeck.github.io/keepwatch/img/tour-poster.jpg",
+      "contentUrl": "https://agentskilldeck.github.io/keepwatch/media/keepwatch-tour.mp4",
+      "uploadDate": "2026-10-16",
+      "duration": "PT1M26S"
+    },
+    {
       "@type": "Organization",
       "@id": "https://agentskilldeck.github.io/#org",
       "name": "AgentSkillDeck",
@@ -104,148 +113,529 @@
 }
 </script>
 <style>
-  :root { --ink:#0b0f17; --panel:#121a2a; --line:#222c40; --text:#f3f4f6; --muted:#a3acbd; --dim:#6f7a90; --teal:#2fe6cf; --teal-2:#14a9b8;
-          --mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace; --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif; }
+  :root {
+    --ink:#0b0f17; --ink-2:#0f1522; --panel:#121a2a; --panel-2:#172137; --line:#222c40; --line-2:#2e3a55;
+    --text:#f3f4f6; --muted:#a3acbd; --dim:#6f7a90;
+    --card:#f3f4f6; --card-ink:#111827; --card-muted:#4b5563;
+    --deck:#3d4e78; --deck-2:#6077a8; --spark:#ffb224; --spark-ink:#1a1204;
+    --ok:#4ade80;
+    --mono: ui-monospace, "SF Mono", "JetBrains Mono", Menlo, Consolas, monospace;
+    --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+    --r:14px;
+  }
   * { box-sizing:border-box; }
+  html { scroll-behavior:smooth; overflow-x:clip; }
+  .hero .wrap > *, .skills > *, .proof > *, .script-row > *, .studio > *, .suit-head > * { min-width:0; }
   body { margin:0; background:var(--ink); color:var(--text); font:17px/1.6 var(--sans); -webkit-font-smoothing:antialiased; }
-  a { color:var(--teal); }
-  .wrap { max-width:1100px; margin:0 auto; padding:0 24px; }
-  header.nav { border-bottom:1px solid var(--line); }
-  header.nav .wrap { display:flex; align-items:center; justify-content:space-between; height:64px; }
-  header.nav a { color:var(--text); text-decoration:none; }
-  .brand { display:flex; align-items:center; gap:10px; font-weight:700; }
-  .brand img { width:28px; height:28px; }
-  .crumbs { color:var(--dim); font-size:14px; text-align:right; }
-  .hero { padding-top:72px; padding-bottom:40px; display:grid; grid-template-columns:1.1fr .9fr; gap:48px; align-items:center; }
-  .eyebrow { color:var(--teal); font:600 13px/1 var(--mono); letter-spacing:.08em; text-transform:uppercase; }
-  h1 { font-size:clamp(34px,5vw,56px); line-height:1.08; letter-spacing:-.02em; margin:14px 0 18px; }
-  h1 em { font-style:normal; color:var(--teal); }
-  h2 { font-size:clamp(26px,3.2vw,36px); letter-spacing:-.01em; margin:0 0 12px; }
-  h3 { margin:0 0 6px; font-size:19px; }
-  .lede { color:var(--muted); font-size:19px; max-width:640px; }
-  .btns { display:flex; gap:12px; flex-wrap:wrap; margin-top:26px; }
-  .btn { display:inline-flex; align-items:center; gap:8px; padding:12px 20px; border-radius:12px; font-weight:600; text-decoration:none; }
-  .btn.primary { background:var(--teal); color:#062521; }
-  .btn.ghost { border:1px solid var(--line); color:var(--text); }
-  .meta { display:flex; gap:16px; flex-wrap:wrap; color:var(--dim); font-size:14px; margin-top:18px; }
-  .shot { border-radius:16px; box-shadow:0 30px 80px rgba(0,0,0,.55); width:100%; height:auto; display:block; }
-  .hero > *, .two > *, .grid > * { min-width:0; }
-  code { overflow-wrap:anywhere; }
-  section { padding:56px 0; border-top:1px solid var(--line); }
-  .grid { display:grid; grid-template-columns:repeat(3,1fr); gap:18px; margin-top:28px; }
-  .card { background:var(--panel); border:1px solid var(--line); border-radius:14px; padding:20px; }
-  .card p { margin:0; color:var(--muted); font-size:16px; }
-  pre { background:#0f1522; border:1px solid var(--line); border-radius:12px; padding:18px 20px; overflow:auto; font:14px/1.7 var(--mono); color:#d7dcea; }
-  pre .c { color:var(--dim); }
-  .two { display:grid; grid-template-columns:1fr 1fr; gap:32px; align-items:start; }
-  details { background:var(--panel); border:1px solid var(--line); border-radius:12px; padding:14px 18px; margin:10px 0; }
-  summary { cursor:pointer; font-weight:600; }
-  details p { color:var(--muted); margin:10px 0 0; }
-  .note { color:var(--dim); font-size:14px; }
-  footer { border-top:1px solid var(--line); padding:28px 0; color:var(--dim); font-size:14px; }
-  @media (max-width: 860px) { .hero, .two { grid-template-columns:1fr; } .grid { grid-template-columns:1fr; } .hero { padding-top:40px; } .brand span { display:none; } }
+  a { color:inherit; }
+  img, video { display:block; max-width:100%; }
+  code { font-family:var(--mono); font-size:.92em; background:var(--panel-2); border:1px solid var(--line); padding:1px 6px; border-radius:6px; }
+  .wrap { max-width:1160px; margin:0 auto; padding:0 24px; }
+  .eyebrow { font:600 12px/1 var(--sans); letter-spacing:.14em; text-transform:uppercase; color:var(--deck-2); }
+  h2 { font-size:clamp(28px, 4vw, 40px); line-height:1.15; letter-spacing:-.02em; margin:12px 0 12px; }
+  .lede { color:var(--muted); max-width:640px; margin:0 0 36px; font-size:18px; }
+  :focus-visible { outline:2px solid var(--spark); outline-offset:3px; border-radius:6px; }
+
+  /* nav */
+  .nav { position:sticky; top:0; z-index:20; background:rgba(11,15,23,.82); backdrop-filter:saturate(140%) blur(10px); border-bottom:1px solid transparent; }
+  .nav.scrolled { border-bottom-color:var(--line); }
+  .nav .wrap { display:flex; align-items:center; justify-content:space-between; height:64px; }
+  .brand { display:flex; align-items:center; gap:10px; text-decoration:none; font-weight:650; letter-spacing:-.01em; }
+  .brand b { font-weight:750; }
+  .brand span { color:var(--muted); font-weight:450; } .brand span b { color:var(--text); }
+  .nav nav { display:flex; align-items:center; gap:26px; font-size:15px; }
+  .nav nav a { color:var(--muted); text-decoration:none; }
+  .nav nav a:hover { color:var(--text); }
+  .dd { position:relative; }
+  .dd-btn { all:unset; cursor:pointer; color:var(--muted); display:inline-flex; align-items:center; gap:5px; font-size:15px; }
+  .dd-btn:hover, .dd.open .dd-btn { color:var(--text); }
+  .dd-btn:focus-visible { outline:2px solid var(--spark); outline-offset:4px; border-radius:6px; }
+  .chev { width:12px; height:12px; fill:none; stroke:currentColor; stroke-width:1.6; transition:transform .2s; }
+  .dd.open .chev { transform:rotate(180deg); }
+  .dd-menu { position:absolute; top:calc(100% + 14px); left:-16px; min-width:320px; background:#0d1220; border:1px solid var(--line-2); border-radius:14px; padding:8px; box-shadow:0 24px 48px -16px rgba(0,0,0,.8); opacity:0; transform:translateY(-6px); pointer-events:none; transition:opacity .15s, transform .15s; }
+  .dd-menu::before { content:""; position:absolute; top:-16px; left:0; right:0; height:16px; }
+  .dd.open .dd-menu { opacity:1; transform:none; pointer-events:auto; }
+  @media (hover:hover) { .dd:hover .dd-menu { opacity:1; transform:none; pointer-events:auto; } .dd:hover .chev { transform:rotate(180deg); } .dd:hover .dd-btn { color:var(--text); } }
+  .dd-menu a { display:flex; gap:12px; align-items:flex-start; padding:10px 12px; border-radius:10px; text-decoration:none; color:var(--text); }
+  .dd-menu a:hover, .dd-menu a:focus-visible { background:var(--panel-2); outline:none; }
+  .dd-menu a i { font-style:normal; width:28px; height:28px; flex:none; display:grid; place-items:center; border-radius:7px; background:var(--card); font-size:13px; }
+  .dd-menu a.ui i { color:#2f3f68; } .dd-menu a.audio i { color:#c2410c; }
+  .dd-menu b { display:block; font:600 14px var(--mono); }
+  .dd-menu small { display:block; color:var(--dim); font-size:13px; margin-top:1px; }
+  .dd-menu .dd-listen { border-top:1px solid var(--line); border-radius:0 0 10px 10px; margin-top:4px; }
+  .dd-menu .dd-listen i { background:var(--spark); }
+  .dd-menu .dd-listen svg { width:12px; height:12px; fill:var(--spark-ink); }
+  .dd-menu .dd-all { display:block; font-size:13px; color:var(--deck-2); padding:8px 12px 10px; border-bottom:1px solid var(--line); border-radius:10px 10px 0 0; margin-bottom:4px; }
+  .skill-index { display:grid; grid-template-columns:repeat(auto-fit, minmax(200px, 1fr)); gap:12px; margin:0 0 28px; }
+  .skill-index a { display:grid; grid-template-columns:auto 1fr; column-gap:12px; align-items:center; text-decoration:none; background:var(--card); color:var(--card-ink); border-radius:12px; padding:12px 14px; box-shadow:0 10px 24px -14px rgba(0,0,0,.8); transition:transform .2s, box-shadow .2s; }
+  .skill-index a:hover { transform:translateY(-3px); box-shadow:0 16px 30px -14px rgba(0,0,0,.9), 0 0 0 2px var(--spark) inset; }
+  .skill-index i { grid-row:span 2; font-style:normal; font-size:20px; }
+  .skill-index a.ui i { color:#2f3f68; } .skill-index a.audio i { color:#c2410c; }
+  .skill-index b { font:700 14px var(--mono); }
+  .skill-index small { color:var(--card-muted); font-size:12.5px; line-height:1.3; }
+  .gh { display:inline-flex; align-items:center; gap:8px; border:1px solid var(--line-2); padding:7px 12px; border-radius:10px; color:var(--text) !important; }
+  .gh svg { width:16px; height:16px; fill:currentColor; }
+
+  /* terminal */
+  .term { background:#0a0e16; border:1px solid var(--line-2); border-radius:var(--r); box-shadow:0 30px 60px -30px rgba(0,0,0,.8), 0 0 0 1px rgba(255,255,255,.02) inset; overflow:hidden; text-align:left; }
+  .term-bar { display:flex; align-items:center; gap:8px; padding:11px 14px; background:#111725; border-bottom:1px solid var(--line); }
+  .dots { display:flex; gap:7px; }
+  .dots i { width:11px; height:11px; border-radius:50%; background:#3a4256; display:block; }
+  .dots i:nth-child(1){ background:#ff5f57; } .dots i:nth-child(2){ background:#febc2e; } .dots i:nth-child(3){ background:#28c840; }
+  .term-title { flex:1; text-align:center; font:500 12.5px var(--mono); color:var(--dim); margin-right:40px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .copy { font:500 12px var(--sans); color:var(--muted); background:var(--panel-2); border:1px solid var(--line-2); border-radius:8px; padding:5px 10px; cursor:pointer; }
+  .copy:hover { color:var(--text); }
+  .copy.done { color:var(--ok); border-color:#245c3a; }
+  .term pre { margin:0; padding:18px 20px 20px; font:14px/1.75 var(--mono); color:#d7dce6; overflow-x:auto; white-space:pre; }
+  .term .p { color:var(--spark); user-select:none; }
+  .term .c { color:var(--dim); }
+  .term .k { color:#9db4ff; }
+  .term .s { color:#f5c97a; }
+  .term .b { color:var(--text); font-weight:700; }
+  .term .g { color:var(--ok); }
+  .term .u { color:#7dd3fc; }
+
+  /* hero */
+  .hero { position:relative; overflow:hidden; padding:72px 0 88px; }
+  .hero::before { content:""; position:absolute; inset:-20% -10% auto; height:720px; background:radial-gradient(600px 360px at 72% 40%, rgba(96,119,168,.28), transparent 70%), radial-gradient(500px 300px at 20% 10%, rgba(255,178,36,.07), transparent 70%); pointer-events:none; }
+  .hero .wrap { position:relative; display:grid; grid-template-columns:1.05fr .95fr; gap:56px; align-items:center; }
+  .hero h1 { font-size:clamp(40px, 6vw, 68px); line-height:1.02; letter-spacing:-.035em; margin:18px 0 20px; font-weight:780; }
+  .hero h1 em { font-style:normal; color:var(--spark); }
+  .hero p.sub { color:var(--muted); font-size:19px; max-width:520px; margin:0 0 32px; }
+  .hero .term { max-width:560px; }
+  .hero-meta { display:flex; flex-wrap:wrap; gap:10px 22px; margin-top:22px; color:var(--dim); font-size:14px; }
+  .hero-meta span::before { content:"✦ "; color:var(--spark); }
+
+  /* the fan */
+  .fan { position:relative; height:470px; }
+  .pcard { all:unset; box-sizing:border-box; position:absolute; left:50%; bottom:30px; width:226px; height:316px; margin-left:-113px; border-radius:16px; background:var(--card); color:var(--card-ink); cursor:pointer;
+    box-shadow:0 24px 48px -18px rgba(0,0,0,.7), 0 0 0 1px rgba(0,0,0,.08) inset; transform-origin:50% 165%; padding:40px 30px 44px; display:flex; flex-direction:column; align-items:center; text-align:center;
+    transition:transform .5s cubic-bezier(.2,.8,.2,1), box-shadow .3s; font-family:var(--sans); }
+  .pcard::before { content:""; position:absolute; inset:9px; border:1px solid rgba(17,24,39,.12); border-radius:10px; pointer-events:none; }
+  .pcard.ui { --suit:#2f3f68; } .pcard.audio { --suit:#c2410c; }
+  .pcard.audio::before { border-color:rgba(194,65,12,.22); } .pcard.ui::before { border-color:rgba(47,63,104,.2); }
+  .idx { position:absolute; top:15px; left:16px; display:flex; flex-direction:row; align-items:center; gap:5px; line-height:1; color:var(--suit); }
+  .idx b { font:800 13px/1 var(--mono); letter-spacing:-.01em; }
+  .idx i { font-style:normal; font-size:13px; }
+  .pcard.rev .idx:not(.bottom) { flex-direction:row-reverse; }
+  .idx.bottom { top:auto; left:auto; bottom:14px; right:15px; transform:rotate(180deg); }
+  .pcard.rev .idx { left:auto; right:15px; } .pcard.rev .idx.bottom { right:auto; left:15px; }
+  .pcard .glyph { flex:1; display:grid; place-items:center; color:var(--suit); }
+  .pcard .glyph svg { width:70px; height:70px; stroke:currentColor; }
+  .pcard h3 { margin:0; font:700 17px/1.2 var(--mono); letter-spacing:-.01em; }
+  .pcard p { margin:5px 0 0; font-size:13px; line-height:1.35; color:var(--card-muted); }
+  .cmd { margin-top:12px; font-size:11.5px !important; display:inline-flex; align-items:center; gap:6px; font:600 12px var(--mono); color:var(--suit); background:rgba(17,24,39,.06); border:1px dashed color-mix(in srgb, var(--suit) 45%, transparent); border-radius:8px; padding:5px 9px; }
+  .cmd code { all:unset; }
+  .cmd svg { width:13px; height:13px; fill:none; stroke:currentColor; stroke-width:2; }
+  .pcard:hover, .pcard:focus-visible { box-shadow:0 34px 60px -18px rgba(0,0,0,.85), 0 0 0 2px var(--spark) inset; }
+  .pcard.copied .cmd { color:#166534; border-color:#16a34a; border-style:solid; background:#dcfce7; }
+  .fan .pcard { transform:rotate(var(--rot)) translateY(var(--lift, 0)); }
+  .fan .pcard:not(.front) h3, .fan .pcard:not(.front) p, .fan .pcard:not(.front) .cmd { opacity:0; transition:opacity .25s; }
+  @media (hover:hover) { .fan .pcard:hover, .fan .pcard:focus-visible { --lift:-26px; z-index:10 !important; } .fan .pcard:hover h3, .fan .pcard:hover p, .fan .pcard:hover .cmd, .fan .pcard:focus-visible h3, .fan .pcard:focus-visible p, .fan .pcard:focus-visible .cmd { opacity:1; } }
+  .toast { position:fixed; left:50%; bottom:24px; transform:translate(-50%, 20px); opacity:0; pointer-events:none; z-index:50; background:var(--card); color:var(--card-ink); border-radius:12px; padding:11px 16px; font-size:14.5px; box-shadow:0 20px 40px -12px rgba(0,0,0,.7); transition:opacity .2s, transform .2s; display:flex; gap:12px; align-items:center; white-space:nowrap; }
+  .toast.show { opacity:1; transform:translate(-50%, 0); pointer-events:auto; }
+  .toast code { background:#e5e7eb; border:0; color:var(--card-ink); }
+  .toast a { color:var(--deck); font-weight:650; }
+  @media (prefers-reduced-motion:no-preference) {
+    .js .fan:not(.dealt) .pcard { transform:rotate(0deg) translateY(20px); }
+  }
+
+  /* sections */
+  section, .skill { scroll-margin-top:80px; }
+  section { padding:96px 0; border-top:1px solid var(--line); }
+  .suit-head { display:grid; grid-template-columns:1fr auto; gap:24px; align-items:end; margin-bottom:36px; }
+  .suit-head .lede { margin:0; }
+  .chip { all:unset; box-sizing:border-box; cursor:pointer; display:inline-flex; align-items:center; gap:14px; font:500 14px var(--mono); padding:10px 10px 10px 16px; border-radius:12px; background:#0a0e16; border:1px solid var(--line-2); color:#d7dce6; white-space:nowrap; transition:border-color .2s, background .2s; }
+  .chip code { all:unset; }
+  .chip .p { color:var(--spark); margin-right:4px; }
+  .chip b { color:var(--spark); font-weight:600; }
+  .chip-act { display:inline-flex; align-items:center; gap:6px; font:600 12px var(--sans); color:var(--muted); background:var(--panel-2); border:1px solid var(--line-2); border-radius:8px; padding:6px 10px; }
+  .chip-act svg { width:13px; height:13px; fill:none; stroke:currentColor; stroke-width:2; }
+  .chip-act em { font-style:normal; }
+  .chip:hover { border-color:var(--deck-2); } .chip:hover .chip-act { color:var(--text); }
+  .chip.done { border-color:#245c3a; } .chip.done .chip-act { color:var(--ok); border-color:#245c3a; }
+
+  .skills { display:grid; grid-template-columns:repeat(2, 1fr); gap:18px; }
+  .skill { background:linear-gradient(180deg, var(--panel), var(--ink-2)); border:1px solid var(--line); border-radius:18px; padding:24px; display:flex; flex-direction:column; gap:14px; }
+  .skill header { display:flex; align-items:center; gap:12px; }
+  .skill header .ico { width:40px; height:40px; border-radius:10px; display:grid; place-items:center; background:var(--card); color:var(--card-ink); flex:none; }
+  .skill header .ico svg { width:22px; height:22px; }
+  #audio .skill header .ico { color:#c2410c; } #ui .skill header .ico { color:#2f3f68; }
+  .skill h3 { margin:0; font:700 18px var(--mono); }
+  .skill .what { color:var(--muted); margin:0; font-size:15.5px; }
+  .say { position:relative; background:var(--panel-2); border:1px solid var(--line-2); border-radius:14px 14px 14px 4px; padding:12px 14px 12px 40px; font-size:15px; }
+  .say::before { content:""; position:absolute; left:14px; top:15px; width:16px; height:16px; border-radius:50%; background:linear-gradient(135deg, var(--deck-2), var(--deck)); }
+  .say small { display:block; color:var(--dim); font:600 11px var(--sans); letter-spacing:.1em; text-transform:uppercase; margin-bottom:2px; }
+  .does { list-style:none; margin:0; padding:0; display:grid; gap:7px; font-size:14.5px; color:var(--muted); }
+  .does li { padding-left:22px; position:relative; }
+  .does li::before { content:""; position:absolute; left:2px; top:.55em; width:9px; height:9px; transform:rotate(45deg); background:var(--spark); border-radius:2px; }
+
+  .proof { display:grid; grid-template-columns:1fr 1fr; gap:18px; margin-top:18px; }
+  .proof .term pre { font-size:13px; line-height:1.7; }
+  .proof-note { color:var(--dim); font-size:14px; margin:10px 2px 0; }
+
+  /* studio player */
+  .studio { display:grid; grid-template-columns:1fr 330px; background:#0a0e16; border:1px solid var(--line-2); border-radius:20px; overflow:hidden; box-shadow:0 50px 90px -40px rgba(0,0,0,.9); }
+  .studio .term-bar { grid-column:1 / -1; }
+  .stage { position:relative; background:#000; aspect-ratio:16/9; }
+  .stage video { width:100%; height:100%; object-fit:cover; }
+  .now { padding:14px 18px; display:flex; justify-content:space-between; gap:12px; align-items:baseline; border-top:1px solid var(--line); background:#0d1220; }
+  .now b { font-size:16px; }
+  .now span { color:var(--dim); font-size:13.5px; font-family:var(--mono); white-space:nowrap; }
+  .playlist { border-left:1px solid var(--line); max-height:100%; overflow-y:auto; background:#0d1220; display:flex; flex-direction:column; }
+  .playlist h4 { margin:0; padding:14px 18px 10px; font:600 11px var(--sans); letter-spacing:.14em; text-transform:uppercase; color:var(--dim); }
+  .track { all:unset; box-sizing:border-box; cursor:pointer; display:grid; grid-template-columns:64px 1fr; gap:12px; align-items:center; padding:10px 18px; border-top:1px solid var(--line); }
+  .track img { width:64px; height:36px; object-fit:cover; border-radius:6px; opacity:.75; }
+  .track b { display:block; font-size:14px; font-weight:600; line-height:1.3; }
+  .track span { display:block; color:var(--dim); font-size:12.5px; }
+  .track:hover { background:var(--panel); }
+  .track[aria-current="true"] { background:var(--panel-2); box-shadow:inset 3px 0 0 var(--spark); }
+  .track[aria-current="true"] img { opacity:1; }
+  .track:focus-visible { outline:2px solid var(--spark); outline-offset:-2px; }
+
+  .script-row { display:grid; grid-template-columns:1.2fr .8fr; gap:18px; margin-top:18px; }
+  .facts { display:grid; gap:12px; align-content:start; }
+  .fact { background:var(--panel); border:1px solid var(--line); border-radius:14px; padding:16px 18px; }
+  .fact b { display:block; font-size:15.5px; margin-bottom:2px; }
+  .fact span { color:var(--muted); font-size:14.5px; }
+
+  /* principles */
+  .principles { display:grid; grid-template-columns:repeat(4, 1fr); gap:18px; }
+  .principle { border-top:2px solid var(--deck-2); padding-top:18px; }
+  .principle b { display:block; font-size:18px; margin-bottom:6px; }
+  .principle p { margin:0; color:var(--muted); font-size:15px; }
+
+  /* close */
+  .close { text-align:center; }
+  .close .term { max-width:640px; margin:0 auto; }
+  .close .lede { margin:0 auto 32px; }
+  .btns { display:flex; justify-content:center; gap:12px; margin-top:28px; flex-wrap:wrap; }
+  .btn { display:inline-flex; align-items:center; gap:8px; padding:12px 20px; border-radius:12px; font-weight:650; text-decoration:none; }
+  .btn.primary { background:var(--spark); color:var(--spark-ink); }
+  .btn.ghost { border:1px solid var(--line-2); }
+  footer a#versions { color:var(--muted); text-decoration:none; font-family:var(--mono); font-size:13px; } footer a#versions:hover { color:var(--text); }
+  footer { border-top:1px solid var(--line); padding:32px 0 48px; color:var(--dim); font-size:14px; }
+  footer .wrap { display:flex; justify-content:space-between; gap:16px; flex-wrap:wrap; }
+
+  @media (max-width:980px) {
+    .hero .wrap { grid-template-columns:1fr; }
+    .fan { height:400px; order:-1; }
+    .skills, .proof, .script-row { grid-template-columns:1fr; }
+    .studio { grid-template-columns:1fr; }
+    .playlist { border-left:0; border-top:1px solid var(--line); flex-direction:row; overflow-x:auto; overflow-y:hidden; }
+    .playlist h4 { display:none; }
+    .track { grid-template-columns:1fr; min-width:170px; border-top:0; border-left:1px solid var(--line); }
+    .track img { width:100%; height:auto; aspect-ratio:16/9; }
+    .track[aria-current="true"] { box-shadow:inset 0 3px 0 var(--spark); }
+    .principles { grid-template-columns:1fr 1fr; }
+    .suit-head { grid-template-columns:1fr; }
+  }
+  @media (max-width:600px) {
+    .nav nav a:not(.gh), .nav nav .dd { display:none; }
+    .hero { padding:56px 0 64px; }
+    .now { flex-direction:column; gap:2px; }
+    .now span { white-space:normal; }
+    .fan { height:300px; }
+    .fan .pcard { transform:rotate(calc(var(--rot) * .62)) translateY(var(--lift, 0)); }
+    .pcard { width:150px; height:214px; margin-left:-75px; padding:30px 12px 32px; border-radius:13px; }
+    .idx { top:11px; left:11px; } .idx.bottom { bottom:11px; right:11px; } .pcard.rev .idx { right:11px; } .pcard.rev .idx.bottom { left:11px; }
+    .idx b { font-size:11px; } .cmd { font-size:10px !important; padding:4px 6px; margin-top:8px; white-space:nowrap; } .cmd svg { display:none; }
+    .pcard .glyph svg { width:48px; height:48px; }
+    .pcard h3 { font-size:13px; }
+    .pcard p { display:none; }
+    section { padding:72px 0; }
+    .principles { grid-template-columns:1fr; }
+    .term pre { font-size:12.5px; padding:14px; }
+    .term-title { margin-right:0; }
+    .chip { font-size:12.5px; gap:10px; padding-left:12px; } .chip-act em { display:none; }
+    .hero h1 { font-size:40px; }
+  }
+  .navlink { color:var(--muted); text-decoration:none; font-weight:600; padding:6px 10px; }
+  .navlink:hover { color:var(--text); }
+  .kw { display:grid; grid-template-columns:1.2fr .8fr; gap:44px; align-items:center; }
+  .kw .btns { justify-content:flex-start; }
+  .kw-shot img { width:100%; height:auto; border-radius:16px; box-shadow:0 30px 80px rgba(0,0,0,.5); display:block; }
+  @media (max-width: 860px) { .kw { grid-template-columns:1fr; } }
+
+  /* keepwatch page */
+  .pcard.watch { --suit:#0f766e; } .pcard.watch::before { border-color:rgba(15,118,110,.22); }
+  .fan .pcard.watch .cmd { font-size:11px !important; }
+  .btns.start { justify-content:flex-start; margin-top:0; }
+  .btn svg { width:16px; height:16px; fill:none; stroke:currentColor; stroke-width:2; stroke-linecap:round; stroke-linejoin:round; }
+  .btn.ghost svg { fill:currentColor; stroke:none; }
+  .skill header .ico { color:#0f766e; }
+  .navlink.is-here { color:var(--text); }
+  .shots { display:grid; grid-template-columns:.62fr 1fr 1fr; gap:18px; align-items:start; }
+  .shots figure { margin:0; background:linear-gradient(180deg, var(--panel), var(--ink-2)); border:1px solid var(--line); border-radius:18px; padding:14px; }
+  .shots img { width:100%; height:auto; border-radius:10px; }
+  .shots figcaption { color:var(--dim); font-size:13.5px; margin:10px 2px 0; }
+  .faq { display:grid; gap:10px; max-width:860px; }
+  .faq details { background:var(--panel); border:1px solid var(--line); border-radius:14px; padding:14px 18px; }
+  .faq summary { cursor:pointer; font-weight:650; }
+  .faq details p { color:var(--muted); margin:10px 0 2px; font-size:15.5px; }
+  .proof-note a, .lede a { color:var(--deck-2); }
+  @media (min-width:981px) { .studio .playlist { max-height:min(calc((100vw - 48px - 330px) * 9 / 16 + 50px), 518px); } }
+  @media (max-width:980px) { .shots { grid-template-columns:1fr; } }
 </style>
 </head>
 <body>
-<header class="nav">
+
+<header class="nav" id="top">
   <div class="wrap">
-    <a class="brand" href="/"><img src="/brand/logo-mark.svg" alt="" width="28" height="28"><span>AgentSkillDeck</span></a>
-    <nav class="crumbs"><a href="/">Plugins</a> · <a href="/keepwatch/" aria-current="page">Keepwatch</a> · <a href="https://github.com/AgentSkillDeck/keepwatch">GitHub</a></nav>
+    <a class="brand" href="/"><img src="/brand/logo-mark.svg" alt="" width="34" height="30"><span>Agent<b>SkillDeck</b></span></a>
+    <nav>
+      <a href="/#ui">UI</a>
+      <a href="/#audio">Audio</a>
+      <a class="navlink is-here" href="/keepwatch/" aria-current="page">Keepwatch</a>
+      <a href="#tour">Tour</a>
+      <a class="gh" href="https://github.com/AgentSkillDeck/keepwatch"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>GitHub</a>
+    </nav>
   </div>
 </header>
 
 <main>
-<div class="wrap hero">
-  <div>
-    <span class="eyebrow">Free macOS app · open source</span>
-    <h1>Keep your Mac awake for AI agents, <em>even with the lid closed.</em></h1>
-    <p class="lede">Keepwatch is a menu-bar app for people who run Claude Code, Codex and other coding agents for hours. Your Mac stays awake exactly while they work. Close the lid and it keeps going, then goes back to sleep on schedule. It also keeps watch on your mic and camera.</p>
-    <div class="btns">
-      <a class="btn primary" href="https://github.com/AgentSkillDeck/keepwatch/releases/latest">Download for macOS</a>
-      <a class="btn ghost" href="https://github.com/AgentSkillDeck/keepwatch">View source on GitHub</a>
+<div class="hero">
+  <div class="wrap">
+    <div>
+      <span class="eyebrow">Free macOS app · part of AgentSkillDeck</span>
+      <h1>Keep your Mac awake for agents, <em>even with the lid closed.</em></h1>
+      <p class="sub"><b>Keepwatch</b> is a menu-bar app for people who run Claude Code, Codex and other coding agents for hours. Your Mac stays awake exactly while they work, keeps going with the lid shut, then sleeps on schedule. It also keeps watch on your mic and camera.</p>
+      <div class="btns start">
+        <a class="btn primary" href="https://github.com/AgentSkillDeck/keepwatch/releases/latest"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12m0 0l-5-5m5 5l5-5M4 21h16"/></svg>Download for macOS</a>
+        <a class="btn ghost" href="#tour"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>Watch the 85-second tour</a>
+      </div>
+      <div class="hero-meta"><span>macOS 14 or later</span><span>Apple silicon and Intel</span><span>Signed and notarized</span><span>No account, no network</span></div>
     </div>
-    <div class="meta"><span>macOS 14 Sonoma or later</span><span>Apple Silicon and Intel</span><span>Apache-2.0</span><span>No account, no network, no telemetry</span></div>
+
+    <div class="fan" id="fan" aria-label="What Keepwatch does">
+      <button type="button" class="pcard watch" data-cmd="keepwatch privacy" data-target="#privacy" style="--rot:-22deg;z-index:1" aria-label="Copy keepwatch privacy"><span class="idx" aria-hidden="true"><b>privacy</b><i>●</i></span><div class="glyph"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0014 0M12 18v3"/></svg></div><h3>privacy</h3><p>Mic and camera, watched</p><span class="cmd"><code>keepwatch privacy</code></span><span class="idx bottom" aria-hidden="true"><b>privacy</b><i>●</i></span></button>
+      <button type="button" class="pcard watch rev" data-cmd="keepwatch lid start --hours 3" data-target="#lid" style="--rot:22deg;z-index:2" aria-label="Copy keepwatch lid start"><span class="idx" aria-hidden="true"><b>lid</b><i>●</i></span><div class="glyph"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round"><rect x="4" y="5" width="16" height="11" rx="1.5"/><path d="M2 19h20"/></svg></div><h3>lid closed</h3><p>Keeps working with the lid shut</p><span class="cmd"><code>keepwatch lid start</code></span><span class="idx bottom" aria-hidden="true"><b>lid</b><i>●</i></span></button>
+      <button type="button" class="pcard watch rev" data-cmd="keepwatch agents" data-target="#agents" style="--rot:11deg;z-index:3" aria-label="Copy keepwatch agents"><span class="idx" aria-hidden="true"><b>agents</b><i>●</i></span><div class="glyph"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M7 9l3 3-3 3M12 15h5"/></svg></div><h3>agents</h3><p>Every session, working or idle</p><span class="cmd"><code>keepwatch agents</code></span><span class="idx bottom" aria-hidden="true"><b>agents</b><i>●</i></span></button>
+      <button type="button" class="pcard watch front" data-cmd="keepwatch awake --agents" data-target="#awake" style="--rot:-6deg;z-index:4" aria-label="Copy keepwatch awake --agents"><span class="idx" aria-hidden="true"><b>awake</b><i>●</i></span><div class="glyph"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg></div><h3>awake</h3><p>Exactly while your agents run</p><span class="cmd"><code>keepwatch awake --agents</code></span><span class="idx bottom" aria-hidden="true"><b>awake</b><i>●</i></span></button>
+    </div>
   </div>
-  <img class="shot" src="img/menu-dark.jpg" width="680" height="1246" alt="The Keepwatch menu: awake status with time left, microphone and camera switches, keep-awake buttons for 1 h, 3 h, 8 h, 1 day, forever or a custom time, agent session badges and lid-closed session controls">
 </div>
 
 <section id="tour">
   <div class="wrap">
-    <h2>See it in 85 seconds</h2>
-    <p class="lede">A narrated tour of every tab. The screens are the real app, showing made-up demo data.</p>
-    <video class="shot" controls preload="metadata" playsinline poster="img/tour-poster.jpg" width="1920" height="1080">
-      <source src="media/keepwatch-tour.mp4" type="video/mp4">
-    </video>
-    <p class="note">Music: “Soft Corporate” by MusicLFiles, <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>. Voice: Supertonic 3, generated on device; an AI voice, not a real person.</p>
+    <span class="eyebrow">Watch</span>
+    <h2>Every tab in 85 seconds.</h2>
+    <p class="lede">The real app, showing made-up demo data. The narration was made on device with the AgentSkillDeck <a href="/#audio">audio plugin</a>. Pick a chapter.</p>
+
+    <div class="studio">
+      <div class="term-bar"><span class="dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="term-title" id="studio-title">keepwatch-tour.mp4 · Meet Keepwatch</span></div>
+      <div>
+        <div class="stage"><video id="player" controls playsinline preload="metadata" poster="img/tour-poster.jpg" src="media/keepwatch-tour.mp4"></video></div>
+        <div class="now"><b id="now-title">Meet Keepwatch</b><span id="now-meta">Narrated tour · 1:25 · captions on screen</span></div>
+      </div>
+      <div class="playlist" role="list" aria-label="Chapters">
+        <h4>Chapters</h4>
+        <button class="track" role="listitem" aria-current="true" data-t="0" data-title="Meet Keepwatch"><img src="media/ch-0.jpg" alt=""><span><b>Meet Keepwatch</b><span>0:00</span></span></button>
+        <button class="track" role="listitem" data-t="7.4" data-title="Stay awake, your way"><img src="media/ch-1.jpg" alt=""><span><b>Stay awake, your way</b><span>0:07</span></span></button>
+        <button class="track" role="listitem" data-t="16.8" data-title="Every agent session"><img src="media/ch-2.jpg" alt=""><span><b>Every agent session</b><span>0:17</span></span></button>
+        <button class="track" role="listitem" data-t="29.2" data-title="Work with the lid shut"><img src="media/ch-3.jpg" alt=""><span><b>Work with the lid shut</b><span>0:29</span></span></button>
+        <button class="track" role="listitem" data-t="40.5" data-title="Mic and camera, watched"><img src="media/ch-4.jpg" alt=""><span><b>Mic and camera</b><span>0:40</span></span></button>
+        <button class="track" role="listitem" data-t="51.5" data-title="Security at a glance"><img src="media/ch-5.jpg" alt=""><span><b>Security at a glance</b><span>0:51</span></span></button>
+        <button class="track" role="listitem" data-t="58" data-title="Battery and memory"><img src="media/ch-6.jpg" alt=""><span><b>Battery and memory</b><span>0:58</span></span></button>
+        <button class="track" role="listitem" data-t="65.8" data-title="Make it yours"><img src="media/ch-7.jpg" alt=""><span><b>Make it yours</b><span>1:06</span></span></button>
+        <button class="track" role="listitem" data-t="71.8" data-title="Your agent can use it too"><img src="media/ch-8.jpg" alt=""><span><b>From the terminal</b><span>1:12</span></span></button>
+        <button class="track" role="listitem" data-t="77.9" data-title="Free and open source"><img src="media/ch-9.jpg" alt=""><span><b>Free and open source</b><span>1:18</span></span></button>
+      </div>
+    </div>
+    <p class="proof-note">Music: “Soft Corporate” by MusicLFiles, <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>. Voice: Supertonic 3, generated on device; an AI voice, not a real person. <a href="media/keepwatch-tour.mp4" download>Download the MP4</a>.</p>
   </div>
 </section>
 
 <section id="features">
   <div class="wrap">
-    <h2>Everything a laptop developer reaches for, in one menu</h2>
-    <p class="lede">No more choosing between a sleeping Mac that kills a three-hour agent run and a Mac left awake all night in your bag.</p>
-    <div class="grid">
-      <div class="card"><h3>Awake while agents run</h3><p>Detects Claude Code, Codex, Gemini CLI, Aider, OpenCode, Goose, Amp and more. Sleeps normally two minutes after the last one exits, and tells you when an agent finishes or goes quiet.</p></div>
-      <div class="card"><h3>Any length you want</h3><p>1 hour, 3, 8, a day, forever, or a custom number of minutes, hours, days or weeks. Or “until 18:30”. Stops by itself when you unplug or the battery gets low, if you like.</p></div>
-      <div class="card"><h3>Every agent session</h3><p>An Agents tab groups your Claude Code, Codex and other sessions, shows the folder, when each started and whether it is working or idle, and stops one with a click.</p></div>
-      <div class="card"><h3>Lid-closed sessions</h3><p>Keep working with the lid shut, then sleep three hours after the lid closes, at 1:00, or when agents finish. One password per session; a watchdog ends it even if the app quits.</p></div>
-      <div class="card"><h3>Safe by default</h3><p>Lid sessions start on power, or on battery above 20%, and stop at 20%. Thermal cut-out, 12-hour cap, and a check on every launch that sleep wasn't left off.</p></div>
-      <div class="card"><h3>Privacy and security</h3><p>A mic switch, camera status, alerts when either turns on, a history kept on your Mac, and checks for firewall, FileVault, Gatekeeper, SIP and AirDrop. Keepwatch itself never records anything.</p></div>
-      <div class="card"><h3>Battery and power</h3><p>Battery health as a percentage of original capacity, cycle count, time left, Low Power Mode, thermal state, and who else is keeping your Mac awake.</p></div>
-      <div class="card"><h3>Developer extras</h3><p>Listening ports with Stop, CPU and memory at a glance, ⌃⌥⌘K to keep awake from anywhere, and ⌃⌥⌘S for Apple's screenshot and screen-video toolbar.</p></div>
+    <div class="suit-head">
+      <div>
+        <span class="eyebrow">What it does</span>
+        <h2>Everything a laptop developer reaches for, in one menu.</h2>
+        <p class="lede">No more choosing between a sleeping Mac that kills a three-hour agent run and a Mac left awake all night in your bag.</p>
+      </div>
+      <button class="chip" data-copy="keepwatch status --json"><code><span class="p">$</span>keepwatch status <b>--json</b></code><span class="chip-act"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 012-2h10"/></svg><em>Copy</em></span></button>
+    </div>
+    <div class="skills">
+      <article class="skill" id="awake">
+        <header><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg></span><h3>Stay awake</h3></header>
+        <p class="what">One click for 1 h, 3 h, 8 h, a day or forever, any custom time up to 30 days, or until 18:30. Or only while your agents run.</p>
+        <ul class="does"><li>Sleeps two minutes after the last agent exits</li><li>Stops when you unplug or at 15% battery, if you like</li><li>⌃⌥⌘K toggles it from any app</li></ul>
+      </article>
+      <article class="skill" id="agents">
+        <header><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M7 9l3 3-3 3M12 15h5"/></svg></span><h3>Agent sessions</h3></header>
+        <p class="what">Claude Code, Codex, Gemini CLI, Aider, OpenCode, Goose, Amp and more, grouped by assistant with the folder, start time and whether each is working or idle.</p>
+        <ul class="does"><li>A ping when an agent finishes or goes quiet</li><li>Stop one session or all, after a confirmation</li><li>Idle helpers never count</li></ul>
+      </article>
+      <article class="skill" id="lid">
+        <header><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="4" y="5" width="16" height="11" rx="1.5"/><path d="M2 19h20"/></svg></span><h3>Lid-closed sessions</h3></header>
+        <p class="what">Keep working with the lid shut, then sleep 1, 3, 6 or 12 hours after it closes, at a set time, or when agents finish. One password per session.</p>
+        <ul class="does"><li>On power, or on battery above 20%</li><li>12-hour cap and a thermal cut-out</li><li>A watchdog ends it even if the app quits</li></ul>
+      </article>
+      <article class="skill" id="privacy">
+        <header><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0014 0M12 18v3"/></svg></span><h3>Mic and camera</h3></header>
+        <p class="what">A red badge in the menu bar while either is live, which app is listening, a mic switch, and alerts when either turns on.</p>
+        <ul class="does"><li>Turn off… jumps to the Camera list in Settings</li><li>A history kept only on your Mac</li><li>Keepwatch itself never records anything</li></ul>
+      </article>
+      <article class="skill">
+        <header><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M12 3l8 3v6c0 4.5-3.4 8.3-8 9-4.6-.7-8-4.5-8-9V6z"/><path d="M9 12l2 2 4-4"/></svg></span><h3>Security and battery</h3></header>
+        <p class="what">Firewall, FileVault, Gatekeeper, SIP and AirDrop at a glance, plus battery health over time, cycles, temperature and time left.</p>
+        <ul class="does"><li>Read-only: it never changes a security setting</li><li>Each check opens the right Settings pane</li></ul>
+      </article>
+      <article class="skill">
+        <header><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 7h16M4 12h10M4 17h7"/></svg></span><h3>Apps and ports</h3></header>
+        <p class="what">See which apps use the most memory and quit them, find what is listening on :3000, and stop a forgotten dev server.</p>
+        <ul class="does"><li>macOS's own processes are never offered</li><li>⌃⌥⌘S opens Apple's screenshot and screen-video toolbar</li></ul>
+      </article>
     </div>
   </div>
 </section>
 
-<section id="agents">
-  <div class="wrap two">
-    <div>
-      <h2>A command line your agents can use</h2>
-      <p class="lede">Install the <code>keepwatch</code> command from the dashboard. Agents get stable JSON and exit codes. They can ask for a lid session, but only you can approve it, by typing your password on the Mac.</p>
-      <p class="note">Add the agent skill so Claude Code and Codex know when to use it: <code>npx skills add AgentSkillDeck/keepwatch</code></p>
-    </div>
-<pre><span class="c"># stay awake exactly while a command runs</span>
-$ keepwatch run -- npm test
-
-<span class="c"># stay awake for 2 days, or until 18:30</span>
-$ keepwatch awake --for 2d
-$ keepwatch awake --until 18:30
-
-<span class="c"># every agent session: folder, working or idle</span>
-$ keepwatch agents
-
-<span class="c"># power, sleep blockers, agents, mic/camera</span>
-$ keepwatch status --json
-
-<span class="c"># what's on :3000?</span>
-$ keepwatch ports</pre>
-  </div>
-</section>
-
-<section id="dashboard">
+<section id="cli">
   <div class="wrap">
-    <h2>The dashboard</h2>
-    <p class="lede">Pick what the summary shows, then switch tabs: Awake, Agents, Lid closed, Privacy, Security, Battery, Ports and Settings.</p>
-    <img class="shot" src="img/dashboard-dark.jpg" width="1520" height="1440" loading="lazy" alt="Keepwatch dashboard: a summary of battery, battery health, agent sessions, microphone, camera, CPU, memory, temperature, charge cycles, ports and security, above tabs and the keep-awake controls">
-    <img class="shot" src="img/privacy-dark.jpg" width="1520" height="1440" loading="lazy" style="margin-top:24px" alt="Keepwatch Privacy tab: microphone switch, camera status, alerts, mute when the lid closes, reset camera access, history and links to app permissions">
+    <span class="eyebrow">For your agents</span>
+    <h2>A command line your agents can use.</h2>
+    <p class="lede">Install the <code>keepwatch</code> command from the dashboard. Agents get stable JSON and exit codes. They can ask for a lid session, but only you can approve it, by typing your password on the Mac.</p>
+    <div class="proof">
+      <div class="term">
+        <div class="term-bar"><span class="dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="term-title">zsh: ~/code/website</span><button class="copy" data-copy="keepwatch run -- npm test">Copy</button></div>
+<pre><span class="c"># stay awake exactly while a command runs</span>
+<span class="p">$</span> keepwatch run -- <span class="s">npm test</span>
+
+<span class="c"># for 2 days, or until 18:30</span>
+<span class="p">$</span> keepwatch awake --for <span class="s">2d</span>
+<span class="p">$</span> keepwatch awake --until <span class="s">18:30</span>
+
+<span class="p">$</span> keepwatch agents
+<span class="b">Claude Code</span>  41201  website     <span class="g">working</span>
+<span class="b">Codex</span>        42010  mobile-app  <span class="g">working</span></pre>
+      </div>
+      <div class="term">
+        <div class="term-bar"><span class="dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="term-title">claude: ~/your-project</span><button class="copy" data-copy="npx skills add AgentSkillDeck/keepwatch">Copy</button></div>
+<pre><span class="c"># teach Claude Code and Codex when to use it</span>
+<span class="p">$</span> npx skills add <span class="b">AgentSkillDeck/keepwatch</span>
+
+<span class="c"># or as a plugin from the AgentSkillDeck marketplace</span>
+<span class="p">&gt;</span> /plugin marketplace add <span class="b">AgentSkillDeck/skills</span>
+<span class="p">&gt;</span> /plugin install <span class="s">keepwatch</span>@agentskilldeck
+
+<span class="p">&gt;</span> keep my Mac awake until the tests pass
+<span class="g">✓</span> <span class="c">keepwatch run -- npm test</span></pre>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="screens">
+  <div class="wrap">
+    <span class="eyebrow">The dashboard</span>
+    <h2>Pick what the summary shows.</h2>
+    <p class="lede">Then switch tabs: Awake, Agents, Lid closed, Privacy, Security, Battery, Apps and Settings.</p>
+    <div class="shots">
+      <figure><img src="img/menu-dark.jpg" width="680" height="1246" loading="lazy" alt="The Keepwatch menu: awake status, microphone and camera switches, keep-awake buttons, agent badges and lid-closed controls"><figcaption>The menu</figcaption></figure>
+      <figure><img src="img/dashboard-dark.jpg" width="1520" height="1440" loading="lazy" alt="Keepwatch dashboard: summary tiles for battery, health, agent sessions, microphone and camera above the tabs and keep-awake controls"><figcaption>The dashboard</figcaption></figure>
+      <figure><img src="img/privacy-dark.jpg" width="1520" height="1440" loading="lazy" alt="Keepwatch Privacy tab: microphone switch, camera status with Turn off, alerts and a local history"><figcaption>Privacy</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <span class="eyebrow">How it is built</span>
+    <h2>Safe by default, and yours to read.</h2>
+    <p class="lede">A bug in a power tool can leave a laptop sleepless in a bag, so the rules are strict.</p>
+    <div class="principles">
+      <div class="principle"><b>One privileged path</b><p>Only a lid session asks for your password, and only you can approve it. Never from a link or an agent.</p></div>
+      <div class="principle"><b>No permissions</b><p>No mic, camera, Accessibility, Screen Recording or Full Disk Access permission. No network requests.</p></div>
+      <div class="principle"><b>Light</b><p>About 15 MB of memory and under 1% CPU. Native Swift and SwiftUI.</p></div>
+      <div class="principle"><b>Open source</b><p>Apache-2.0, signed with a Developer ID and notarized by Apple.</p></div>
+    </div>
   </div>
 </section>
 
 <section id="faq">
   <div class="wrap">
-    <h2>Questions</h2>
-    <details open><summary>Can a MacBook keep running with the lid closed without an external display?</summary><p>Not by default: closing the lid sleeps the Mac unless an external display, power and keyboard are attached. Keepwatch runs a lid-closed session: you enter your password once, it turns sleep off, and a small watchdog turns sleep back on and puts the Mac to sleep after the time you chose, at a set time, when your agents finish, or if the battery gets low.</p></details>
-    <details><summary>How do I keep my Mac awake while Claude Code or Codex is running?</summary><p>Turn on “While AI agents run” in Keepwatch, or run <code>keepwatch awake --agents</code>. The Mac stays awake while agent CLIs run, then sleeps normally two minutes after the last one exits. Agents can also wrap a single command with <code>keepwatch run -- &lt;command&gt;</code>.</p></details>
-    <details><summary>Is it safe to keep a MacBook awake with the lid closed in a bag?</summary><p>Heat in a closed bag is the main risk, so Keepwatch only starts lid-closed sessions on power or on battery above 20%, ends them on serious thermal pressure or at 20% battery, caps every session at 12 hours, and checks on every launch that sleep was not left off.</p></details>
-    <details><summary>How is Keepwatch different from caffeinate or Amphetamine?</summary><p><code>caffeinate</code> can't keep a Mac awake with the lid closed, and Amphetamine needs a separate helper for that. Keepwatch is built for AI agents: it knows when agent CLIs are running, ends lid sessions on its own, adds mic and camera indicators, and ships a CLI with JSON output that agents can call. It's free and open source under Apache-2.0.</p></details>
-    <details><summary>Does Keepwatch need microphone or camera permission?</summary><p>No. It never records anything; it only asks macOS whether the microphone or camera is running. It needs no Full Disk Access, Accessibility or Screen Recording permission and makes no network requests.</p></details>
-    <p class="note">Lid-closed sessions are in beta. Read exactly what runs with administrator rights in <a href="https://github.com/AgentSkillDeck/keepwatch/blob/main/SECURITY.md">SECURITY.md</a>.</p>
+    <span class="eyebrow">Questions</span>
+    <h2>Before you install.</h2>
+    <div class="faq">
+      <details open><summary>Can a MacBook keep running with the lid closed without an external display?</summary><p>Not by default: closing the lid sleeps the Mac unless an external display, power and keyboard are attached. Keepwatch runs a lid-closed session: you enter your password once, it turns sleep off, and a small watchdog turns sleep back on and puts the Mac to sleep after the time you chose, at a set time, when your agents finish, or if the battery gets low.</p></details>
+      <details><summary>Why does my Mac ask for a password when I open the lid?</summary><p>The Mac kept working, but macOS locks the screen once the display has been off for the delay in System Settings › Lock Screen. That protects a laptop left in a bag, so Keepwatch leaves it alone.</p></details>
+      <details><summary>How do I keep my Mac awake while Claude Code or Codex is running?</summary><p>Turn on “While AI agents run”, or run <code>keepwatch awake --agents</code>. Agents can also wrap a single command with <code>keepwatch run -- &lt;command&gt;</code>.</p></details>
+      <details><summary>Is it safe to keep a MacBook awake with the lid closed in a bag?</summary><p>Heat in a closed bag is the main risk, so lid sessions only start on power or on battery above 20%, end on serious thermal pressure or at 20% battery, are capped at 12 hours, and every launch checks that sleep was not left off.</p></details>
+      <details><summary>How is Keepwatch different from caffeinate or Amphetamine?</summary><p><code>caffeinate</code> can't keep a Mac awake with the lid closed, and Amphetamine needs a separate helper for that. Keepwatch knows when agent CLIs are running, ends lid sessions on its own, watches the mic and camera, and ships a CLI agents can call.</p></details>
+      <details><summary>Does Keepwatch need microphone or camera permission?</summary><p>No. It never records anything; it only asks macOS whether the microphone or camera is running.</p></details>
+    </div>
+    <p class="proof-note">Lid-closed sessions are in beta. Read exactly what runs with administrator rights in <a href="https://github.com/AgentSkillDeck/keepwatch/blob/main/SECURITY.md">SECURITY.md</a>.</p>
+  </div>
+</section>
+
+<section id="install" class="close">
+  <div class="wrap">
+    <span class="eyebrow">Install</span>
+    <h2>Download, drag, done.</h2>
+    <p class="lede">Open the DMG, drag Keepwatch to Applications, and find the eye in your menu bar. Then install the command from the dashboard.</p>
+    <div class="btns">
+      <a class="btn primary" href="https://github.com/AgentSkillDeck/keepwatch/releases/latest">Download for macOS</a>
+      <a class="btn ghost" href="https://github.com/AgentSkillDeck/keepwatch">Star on GitHub</a>
+    </div>
   </div>
 </section>
 </main>
 
+<div class="toast" id="toast" role="status" aria-live="polite"><span id="toast-msg"></span><a id="toast-link" href="#">See details</a></div>
+
 <footer>
-  <div class="wrap">Keepwatch is part of <a href="/">AgentSkillDeck</a>, open plugins and tools for coding agents · Apache-2.0 · <a href="https://github.com/AgentSkillDeck/keepwatch">Source</a></div>
+  <div class="wrap">
+    <span>Keepwatch is part of <a href="/">AgentSkillDeck</a> · Apache-2.0 · <a href="https://github.com/AgentSkillDeck/keepwatch/releases/latest">v0.2.0</a></span>
+    <span><a href="https://github.com/AgentSkillDeck/keepwatch/blob/main/SECURITY.md">Security</a> · <a href="https://github.com/AgentSkillDeck/keepwatch">Source</a></span>
+  </div>
 </footer>
+
+<script>
+  requestAnimationFrame(() => setTimeout(() => document.getElementById('fan').classList.add('dealt'), 120));
+
+  const nav = document.querySelector('.nav');
+  addEventListener('scroll', () => nav.classList.toggle('scrolled', scrollY > 8), { passive: true });
+
+  document.querySelectorAll('.copy, .chip').forEach((b) => b.addEventListener('click', async () => {
+    const label = b.classList.contains('chip') ? b.querySelector('.chip-act em') : b;
+    try { await navigator.clipboard.writeText(b.dataset.copy); label.textContent = 'Copied'; b.classList.add('done'); }
+    catch { label.textContent = 'Select and copy'; }
+    setTimeout(() => { label.textContent = 'Copy'; b.classList.remove('done'); }, 1800);
+  }));
+
+  const toast = document.getElementById('toast');
+  let toastTimer;
+  document.querySelectorAll('.pcard').forEach((c) => c.addEventListener('click', async () => {
+    const cmd = c.dataset.cmd;
+    let ok = true;
+    try { await navigator.clipboard.writeText(cmd); } catch { ok = false; }
+    document.getElementById('toast-msg').innerHTML = ok ? `Copied <code>${cmd}</code>. Paste it in Terminal.` : `Type <code>${cmd}</code> in Terminal.`;
+    document.getElementById('toast-link').href = c.dataset.target;
+    toast.classList.add('show');
+    c.classList.add('copied');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => { toast.classList.remove('show'); c.classList.remove('copied'); }, 2600);
+  }));
+
+  // Chapters seek the one tour video; the current chapter follows playback.
+  const player = document.getElementById('player');
+  const tracks = [...document.querySelectorAll('.track')];
+  const mark = (t) => {
+    tracks.forEach((x) => x.setAttribute('aria-current', String(x === t)));
+    document.getElementById('now-title').textContent = t.dataset.title;
+    document.getElementById('studio-title').textContent = `keepwatch-tour.mp4 · ${t.dataset.title}`;
+  };
+  tracks.forEach((t) => t.addEventListener('click', () => {
+    mark(t);
+    player.currentTime = Number(t.dataset.t);
+    player.play().catch(() => {});
+  }));
+  player.addEventListener('timeupdate', () => {
+    const now = player.currentTime;
+    const t = tracks.filter((x) => Number(x.dataset.t) <= now + 0.1).pop();
+    if (t && t.getAttribute('aria-current') !== 'true') mark(t);
+  });
+</script>
 </body>
 </html>
