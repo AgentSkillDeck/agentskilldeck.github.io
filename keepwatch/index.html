@@ -37,7 +37,7 @@
       "operatingSystem": "macOS 14 or later",
       "url": "https://agentskilldeck.github.io/keepwatch/",
       "downloadUrl": "https://github.com/AgentSkillDeck/keepwatch/releases/latest",
-      "softwareVersion": "0.1.0",
+      "softwareVersion": "0.2.0",
       "license": "https://www.apache.org/licenses/LICENSE-2.0",
       "isAccessibleForFree": true,
       "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
@@ -48,7 +48,13 @@
       "featureList": [
         "Keep the Mac awake while Claude Code, Codex, Gemini CLI and other agent CLIs run",
         "Lid-closed sessions that sleep N hours after the lid closes or at a set time",
-        "Never on battery by default, 12-hour hard cap, thermal cut-out",
+        "On battery only above 20%, 12-hour hard cap, thermal cut-out",
+        "Keep awake for any length (minutes to weeks) or until a set time",
+        "Agents tab: every Claude Code, Codex and Gemini CLI session with working or idle status and Stop",
+        "Mic switch, camera status, alerts and a local mic and camera history",
+        "Read-only security checks: firewall, FileVault, Gatekeeper, SIP, AirDrop",
+        "Customisable summary: battery, health, CPU, memory, agents, mic, camera and more",
+        "Global shortcuts for keep-awake and Apple's screenshot toolbar",
         "Live microphone and camera in-use indicators and which app uses the mic",
         "Mute the mic when the lid closes",
         "Battery health, cycle count and thermal state",
@@ -80,7 +86,7 @@
         {
           "@type": "Question",
           "name": "Is it safe to keep a MacBook awake with the lid closed in a bag?",
-          "acceptedAnswer": { "@type": "Answer", "text": "Heat in a closed bag is the main risk, so Keepwatch only runs lid-closed sessions on power by default, ends them on serious thermal pressure or low battery, caps every session at 12 hours, and checks on every launch that sleep was not left off." }
+          "acceptedAnswer": { "@type": "Answer", "text": "Heat in a closed bag is the main risk, so Keepwatch only starts lid-closed sessions on power or on battery above 20%, ends them on serious thermal pressure or at 20% battery, caps every session at 12 hours, and checks on every launch that sleep was not left off." }
         },
         {
           "@type": "Question",
@@ -160,7 +166,7 @@
     </div>
     <div class="meta"><span>macOS 14 Sonoma or later</span><span>Apple Silicon and Intel</span><span>Apache-2.0</span><span>No account, no network, no telemetry</span></div>
   </div>
-  <img class="shot" src="img/menu-dark.jpg" width="640" height="776" alt="The Keepwatch menu: battery, mic and camera status, keep-awake buttons, a 'While AI agents run' switch and lid-closed session controls">
+  <img class="shot" src="img/menu-dark.jpg" width="640" height="1408" alt="The Keepwatch menu: awake status with time left, microphone and camera switches, keep-awake buttons for 1 h, 3 h, 8 h, 1 day, forever or a custom time, agent session badges and lid-closed session controls">
 </div>
 
 <section id="features">
@@ -168,12 +174,14 @@
     <h2>Everything a laptop developer reaches for, in one menu</h2>
     <p class="lede">No more choosing between a sleeping Mac that kills a three-hour agent run and a Mac left awake all night in your bag.</p>
     <div class="grid">
-      <div class="card"><h3>Awake while agents run</h3><p>Detects Claude Code, Codex, Gemini CLI, Aider, OpenCode, Goose, Amp and more. Sleeps normally two minutes after the last one exits, and tells you when an agent finishes.</p></div>
+      <div class="card"><h3>Awake while agents run</h3><p>Detects Claude Code, Codex, Gemini CLI, Aider, OpenCode, Goose, Amp and more. Sleeps normally two minutes after the last one exits, and tells you when an agent finishes or goes quiet.</p></div>
+      <div class="card"><h3>Any length you want</h3><p>1 hour, 3, 8, a day, forever, or a custom number of minutes, hours, days or weeks. Or “until 18:30”. Stops by itself when you unplug or the battery gets low, if you like.</p></div>
+      <div class="card"><h3>Every agent session</h3><p>An Agents tab groups your Claude Code, Codex and other sessions, shows the folder, when each started and whether it is working or idle, and stops one with a click.</p></div>
       <div class="card"><h3>Lid-closed sessions</h3><p>Keep working with the lid shut, then sleep three hours after the lid closes, at 1:00, or when agents finish. One password per session; a watchdog ends it even if the app quits.</p></div>
-      <div class="card"><h3>Safe by default</h3><p>Lid sessions run only on power unless you allow battery (then they stop at 20%). Thermal cut-out, 12-hour cap, and a check on every launch that sleep wasn't left off.</p></div>
-      <div class="card"><h3>Mic and camera watch</h3><p>Live indicators in the menu bar, which app is using your microphone, one-click mute, and mute when the lid closes. Keepwatch itself never records anything.</p></div>
+      <div class="card"><h3>Safe by default</h3><p>Lid sessions start on power, or on battery above 20%, and stop at 20%. Thermal cut-out, 12-hour cap, and a check on every launch that sleep wasn't left off.</p></div>
+      <div class="card"><h3>Privacy and security</h3><p>A mic switch, camera status, alerts when either turns on, a history kept on your Mac, and checks for firewall, FileVault, Gatekeeper, SIP and AirDrop. Keepwatch itself never records anything.</p></div>
       <div class="card"><h3>Battery and power</h3><p>Battery health as a percentage of original capacity, cycle count, time left, Low Power Mode, thermal state, and who else is keeping your Mac awake.</p></div>
-      <div class="card"><h3>Developer extras</h3><p>See which of your processes are listening on which ports, and stop one with a confirmation. One-click Dock and Finder toggles, and links to every privacy pane.</p></div>
+      <div class="card"><h3>Developer extras</h3><p>Listening ports with Stop, CPU and memory at a glance, ⌃⌥⌘K to keep awake from anywhere, and ⌃⌥⌘S for Apple's screenshot and screen-video toolbar.</p></div>
     </div>
   </div>
 </section>
@@ -182,14 +190,18 @@
   <div class="wrap two">
     <div>
       <h2>A command line your agents can use</h2>
-      <p class="lede">Install the <code>keepwatch</code> command from the dashboard. Agents get stable JSON and exit codes, and they can never start a lid session: that always needs your password.</p>
+      <p class="lede">Install the <code>keepwatch</code> command from the dashboard. Agents get stable JSON and exit codes. They can ask for a lid session, but only you can approve it, by typing your password on the Mac.</p>
       <p class="note">Add the agent skill so Claude Code and Codex know when to use it: <code>npx skills add AgentSkillDeck/keepwatch</code></p>
     </div>
 <pre><span class="c"># stay awake exactly while a command runs</span>
 $ keepwatch run -- npm test
 
-<span class="c"># stay awake while any agent CLI runs</span>
-$ keepwatch awake --agents
+<span class="c"># stay awake for 2 days, or until 18:30</span>
+$ keepwatch awake --for 2d
+$ keepwatch awake --until 18:30
+
+<span class="c"># every agent session: folder, working or idle</span>
+$ keepwatch agents
 
 <span class="c"># power, sleep blockers, agents, mic/camera</span>
 $ keepwatch status --json
@@ -202,8 +214,9 @@ $ keepwatch ports</pre>
 <section id="dashboard">
   <div class="wrap">
     <h2>The dashboard</h2>
-    <p class="lede">Every control in one window: stay awake, lid-closed sessions, privacy, battery and power, quick settings, listening ports and start at login.</p>
-    <img class="shot" src="img/dashboard-dark.jpg" width="1520" height="1440" loading="lazy" alt="Keepwatch dashboard with stay-awake, lid-closed session, privacy, battery and power, and quick settings cards">
+    <p class="lede">Pick what the summary shows, then switch tabs: Awake, Agents, Lid closed, Privacy, Security, Battery, Ports and Settings.</p>
+    <img class="shot" src="img/dashboard-dark.jpg" width="1520" height="1440" loading="lazy" alt="Keepwatch dashboard: a summary of battery, battery health, agent sessions, microphone, camera, CPU, memory, temperature, charge cycles, ports and security, above tabs and the keep-awake controls">
+    <img class="shot" src="img/privacy-dark.jpg" width="1520" height="1440" loading="lazy" style="margin-top:24px" alt="Keepwatch Privacy tab: microphone switch, camera status, alerts, mute when the lid closes, reset camera access, history and links to app permissions">
   </div>
 </section>
 
@@ -212,7 +225,7 @@ $ keepwatch ports</pre>
     <h2>Questions</h2>
     <details open><summary>Can a MacBook keep running with the lid closed without an external display?</summary><p>Not by default: closing the lid sleeps the Mac unless an external display, power and keyboard are attached. Keepwatch runs a lid-closed session: you enter your password once, it turns sleep off, and a small watchdog turns sleep back on and puts the Mac to sleep after the time you chose, at a set time, when your agents finish, or if the battery gets low.</p></details>
     <details><summary>How do I keep my Mac awake while Claude Code or Codex is running?</summary><p>Turn on “While AI agents run” in Keepwatch, or run <code>keepwatch awake --agents</code>. The Mac stays awake while agent CLIs run, then sleeps normally two minutes after the last one exits. Agents can also wrap a single command with <code>keepwatch run -- &lt;command&gt;</code>.</p></details>
-    <details><summary>Is it safe to keep a MacBook awake with the lid closed in a bag?</summary><p>Heat in a closed bag is the main risk, so Keepwatch only runs lid-closed sessions on power by default, ends them on serious thermal pressure or low battery, caps every session at 12 hours, and checks on every launch that sleep was not left off.</p></details>
+    <details><summary>Is it safe to keep a MacBook awake with the lid closed in a bag?</summary><p>Heat in a closed bag is the main risk, so Keepwatch only starts lid-closed sessions on power or on battery above 20%, ends them on serious thermal pressure or at 20% battery, caps every session at 12 hours, and checks on every launch that sleep was not left off.</p></details>
     <details><summary>How is Keepwatch different from caffeinate or Amphetamine?</summary><p><code>caffeinate</code> can't keep a Mac awake with the lid closed, and Amphetamine needs a separate helper for that. Keepwatch is built for AI agents: it knows when agent CLIs are running, ends lid sessions on its own, adds mic and camera indicators, and ships a CLI with JSON output that agents can call. It's free and open source under Apache-2.0.</p></details>
     <details><summary>Does Keepwatch need microphone or camera permission?</summary><p>No. It never records anything; it only asks macOS whether the microphone or camera is running. It needs no Full Disk Access, Accessibility or Screen Recording permission and makes no network requests.</p></details>
     <p class="note">Lid-closed sessions are in beta. Read exactly what runs with administrator rights in <a href="https://github.com/AgentSkillDeck/keepwatch/blob/main/SECURITY.md">SECURITY.md</a>.</p>
