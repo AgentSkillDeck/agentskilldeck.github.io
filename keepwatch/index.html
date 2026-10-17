@@ -34,7 +34,7 @@
       "name": "Keepwatch",
       "description": "A macOS menu-bar app that keeps your Mac awake while AI coding agents such as Claude Code and Codex run, including lid-closed sessions that go back to sleep on schedule, with live microphone and camera indicators and a command-line tool for agents.",
       "applicationCategory": "UtilitiesApplication",
-      "operatingSystem": "macOS 14 or later; command line also on Linux and Windows",
+      "operatingSystem": "macOS 14 or later; Linux and Windows in beta",
       "url": "https://agentskilldeck.github.io/keepwatch/",
       "downloadUrl": "https://github.com/AgentSkillDeck/keepwatch/releases/latest",
       "softwareVersion": "0.3.0",
@@ -404,7 +404,7 @@
         <a class="btn primary" href="https://github.com/AgentSkillDeck/keepwatch/releases/latest"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12m0 0l-5-5m5 5l5-5M4 21h16"/></svg>Download for macOS</a>
         <a class="btn ghost" href="#tour"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>Watch the 95-second tour</a>
       </div>
-      <div class="hero-meta"><span>macOS 14 or later</span><span>Apple silicon and Intel</span><span>Signed and notarized</span><span>No account, no tracking</span><span><a href="#install">Command line for Linux and Windows (beta)</a></span></div>
+      <div class="hero-meta"><span>macOS 14 or later</span><span>Apple silicon and Intel</span><span>Signed and notarized</span><span>No account, no tracking</span><span><a href="#install">Linux (tray and lid) and Windows, in beta</a></span></div>
     </div>
 
     <div class="fan" id="fan" aria-label="What Keepwatch does">
@@ -569,7 +569,7 @@
       <details><summary>How do I keep my Mac awake while Claude Code or Codex is running?</summary><p>Turn on “While AI agents run”, or run <code>keepwatch awake --agents</code>. Agents can also wrap a single command with <code>keepwatch run -- &lt;command&gt;</code>.</p></details>
       <details><summary>Is it safe to keep a MacBook awake with the lid closed in a bag?</summary><p>Heat in a closed bag is the main risk, so lid sessions only start on power or on battery above 20%, end on serious thermal pressure or at 20% battery, are capped at 12 hours, and every launch checks that sleep was not left off.</p></details>
       <details><summary>How is Keepwatch different from caffeinate or Amphetamine?</summary><p><code>caffeinate</code> can't keep a Mac awake with the lid closed, and Amphetamine needs a separate helper for that. Keepwatch knows when agent CLIs are running, ends lid sessions on its own, watches the mic and camera, and ships a CLI agents can call.</p></details>
-      <details><summary>Does Keepwatch work on Linux or Windows?</summary><p>The <code>keepwatch</code> command does, in beta: <code>status</code>, <code>awake</code>, <code>run</code>, <code>agents</code>, <code>ports</code>, <code>privacy</code> and <code>apps</code>, with the same JSON as on the Mac. The menu-bar app, lid-closed sessions and mic mute are macOS only for now. On Linux, keeping awake uses systemd.</p></details>
+      <details><summary>Does Keepwatch work on Linux or Windows?</summary><p>Yes, in beta. On Linux there is a tray icon and laptop-closed sessions with the same rules as on the Mac, with no password: Keepwatch asks systemd to ignore the lid only while it runs, so if it crashes the laptop sleeps as usual. Stock GNOME needs the AppIndicator extension for the icon. Windows has the <code>keepwatch</code> command (<code>status</code>, <code>awake</code>, <code>run</code>, <code>agents</code>, <code>ports</code>) for now. Mic mute is macOS only.</p></details>
       <details><summary>Does Keepwatch need microphone or camera permission?</summary><p>No. It never records anything; it only asks macOS whether the microphone or camera is running. It asks for Accessibility only if you turn on Stay active, and goes online only if you turn on the update check.</p></details>
     </div>
     <p class="proof-note">Lid-closed sessions are in beta. Read exactly what runs with administrator rights in <a href="https://github.com/AgentSkillDeck/keepwatch/blob/main/SECURITY.md">SECURITY.md</a>.</p>
@@ -585,7 +585,7 @@
       <a class="btn primary" href="https://github.com/AgentSkillDeck/keepwatch/releases/latest">Download for macOS</a>
       <a class="btn ghost" href="https://github.com/AgentSkillDeck/keepwatch">Star on GitHub</a>
     </div>
-    <p class="lede" style="margin-top:28px">Command line only, on other systems (beta): <a href="https://github.com/AgentSkillDeck/keepwatch/releases/download/v0.3.0/keepwatch-0.3.0-linux-x86_64.tar.gz">Linux x86_64</a> (static, any distribution) · <a href="https://github.com/AgentSkillDeck/keepwatch/releases/download/v0.3.0/keepwatch-0.3.0-windows-x86_64.zip">Windows x86_64</a> (not code-signed yet, so SmartScreen may warn) · <a href="https://github.com/AgentSkillDeck/keepwatch/releases/download/v0.3.0/SHA256SUMS.txt">checksums</a> · <a href="https://github.com/AgentSkillDeck/keepwatch/blob/main/cross/README.md">what works</a>.</p>
+    <p class="lede" style="margin-top:28px">Linux and Windows (beta, <a href="https://github.com/AgentSkillDeck/keepwatch/releases/tag/v0.4.0-beta.1">v0.4.0-beta.1</a>): <a href="https://github.com/AgentSkillDeck/keepwatch/releases/download/v0.4.0-beta.1/keepwatch-0.4.0-beta.1-linux-x86_64.tar.gz">Linux x86_64</a> (tray icon, laptop-closed sessions and the command, static, any distribution with systemd) · <a href="https://github.com/AgentSkillDeck/keepwatch/releases/download/v0.4.0-beta.1/keepwatch-0.4.0-beta.1-windows-x86_64.zip">Windows x86_64</a> (command line; not code-signed yet, so SmartScreen may warn) · <a href="https://github.com/AgentSkillDeck/keepwatch/releases/download/v0.4.0-beta.1/SHA256SUMS.txt">checksums</a> · <a href="https://github.com/AgentSkillDeck/keepwatch/blob/main/cross/README.md">what works</a>.</p>
   </div>
 </section>
 </main>
