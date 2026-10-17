@@ -37,7 +37,7 @@
       "operatingSystem": "macOS 14 or later",
       "url": "https://agentskilldeck.github.io/keepwatch/",
       "downloadUrl": "https://github.com/AgentSkillDeck/keepwatch/releases/latest",
-      "softwareVersion": "0.2.0",
+      "softwareVersion": "0.3.0",
       "license": "https://www.apache.org/licenses/LICENSE-2.0",
       "isAccessibleForFree": true,
       "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
@@ -105,7 +105,7 @@
         {
           "@type": "Question",
           "name": "Does Keepwatch need microphone or camera permission?",
-          "acceptedAnswer": { "@type": "Answer", "text": "No. It never records anything; it only asks macOS whether the microphone or camera is running. It needs no Full Disk Access, Accessibility or Screen Recording permission and makes no network requests." }
+          "acceptedAnswer": { "@type": "Answer", "text": "No. It never records anything; it only asks macOS whether the microphone or camera is running. It needs no Full Disk Access or Screen Recording permission. Accessibility is asked for only if you turn on Stay active, and it makes no network requests unless you turn on the update check." }
         }
       ]
     }
@@ -404,7 +404,7 @@
         <a class="btn primary" href="https://github.com/AgentSkillDeck/keepwatch/releases/latest"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12m0 0l-5-5m5 5l5-5M4 21h16"/></svg>Download for macOS</a>
         <a class="btn ghost" href="#tour"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>Watch the 85-second tour</a>
       </div>
-      <div class="hero-meta"><span>macOS 14 or later</span><span>Apple silicon and Intel</span><span>Signed and notarized</span><span>No account, no network</span></div>
+      <div class="hero-meta"><span>macOS 14 or later</span><span>Apple silicon and Intel</span><span>Signed and notarized</span><span>No account, no tracking</span></div>
     </div>
 
     <div class="fan" id="fan" aria-label="What Keepwatch does">
@@ -431,15 +431,16 @@
       <div class="playlist" role="list" aria-label="Chapters">
         <h4>Chapters</h4>
         <button class="track" role="listitem" aria-current="true" data-t="0" data-title="Meet Keepwatch"><img src="media/ch-0.jpg" alt=""><span><b>Meet Keepwatch</b><span>0:00</span></span></button>
-        <button class="track" role="listitem" data-t="7.4" data-title="Stay awake, your way"><img src="media/ch-1.jpg" alt=""><span><b>Stay awake, your way</b><span>0:07</span></span></button>
-        <button class="track" role="listitem" data-t="16.8" data-title="Every agent session"><img src="media/ch-2.jpg" alt=""><span><b>Every agent session</b><span>0:17</span></span></button>
-        <button class="track" role="listitem" data-t="29.2" data-title="Work with the lid shut"><img src="media/ch-3.jpg" alt=""><span><b>Work with the lid shut</b><span>0:29</span></span></button>
-        <button class="track" role="listitem" data-t="40.5" data-title="Mic and camera, watched"><img src="media/ch-4.jpg" alt=""><span><b>Mic and camera</b><span>0:40</span></span></button>
-        <button class="track" role="listitem" data-t="51.5" data-title="Security at a glance"><img src="media/ch-5.jpg" alt=""><span><b>Security at a glance</b><span>0:51</span></span></button>
-        <button class="track" role="listitem" data-t="58" data-title="Battery and memory"><img src="media/ch-6.jpg" alt=""><span><b>Battery and memory</b><span>0:58</span></span></button>
-        <button class="track" role="listitem" data-t="65.8" data-title="Make it yours"><img src="media/ch-7.jpg" alt=""><span><b>Make it yours</b><span>1:06</span></span></button>
-        <button class="track" role="listitem" data-t="71.8" data-title="Your agent can use it too"><img src="media/ch-8.jpg" alt=""><span><b>From the terminal</b><span>1:12</span></span></button>
-        <button class="track" role="listitem" data-t="77.9" data-title="Free and open source"><img src="media/ch-9.jpg" alt=""><span><b>Free and open source</b><span>1:18</span></span></button>
+        <button class="track" role="listitem" data-t="7.45" data-title="Stay awake, your way"><img src="media/ch-1.jpg" alt=""><span><b>Stay awake, your way</b><span>0:07</span></span></button>
+        <button class="track" role="listitem" data-t="16.8" data-title="Every agent session"><img src="media/ch-2.jpg" alt=""><span><b>Every agent session</b><span>0:16</span></span></button>
+        <button class="track" role="listitem" data-t="30.85" data-title="Work with the lid shut"><img src="media/ch-3.jpg" alt=""><span><b>Work with the lid shut</b><span>0:30</span></span></button>
+        <button class="track" role="listitem" data-t="42.25" data-title="Mic and camera, watched"><img src="media/ch-4.jpg" alt=""><span><b>Mic and camera</b><span>0:42</span></span></button>
+        <button class="track" role="listitem" data-t="53.35" data-title="Security at a glance"><img src="media/ch-5.jpg" alt=""><span><b>Security at a glance</b><span>0:53</span></span></button>
+        <button class="track" role="listitem" data-t="62.15" data-title="Battery and storage"><img src="media/ch-6.jpg" alt=""><span><b>Battery and storage</b><span>1:02</span></span></button>
+        <button class="track" role="listitem" data-t="71.15" data-title="A quick timer"><img src="media/ch-7.jpg" alt=""><span><b>A quick timer</b><span>1:11</span></span></button>
+        <button class="track" role="listitem" data-t="75.35" data-title="Make it yours"><img src="media/ch-8.jpg" alt=""><span><b>Make it yours</b><span>1:15</span></span></button>
+        <button class="track" role="listitem" data-t="81.25" data-title="Your agent can use it too"><img src="media/ch-9.jpg" alt=""><span><b>From the terminal</b><span>1:21</span></span></button>
+        <button class="track" role="listitem" data-t="87.45" data-title="Free and open source"><img src="media/ch-10.jpg" alt=""><span><b>Free and open source</b><span>1:27</span></span></button>
       </div>
     </div>
     <p class="proof-note">Music: “Soft Corporate” by MusicLFiles, <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>. Voice: Supertonic 3, generated on device; an AI voice, not a real person. <a href="media/keepwatch-tour.mp4" download>Download the MP4</a>.</p>
@@ -479,13 +480,18 @@
       </article>
       <article class="skill">
         <header><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M12 3l8 3v6c0 4.5-3.4 8.3-8 9-4.6-.7-8-4.5-8-9V6z"/><path d="M9 12l2 2 4-4"/></svg></span><h3>Security and battery</h3></header>
-        <p class="what">Firewall, FileVault, Gatekeeper, SIP and AirDrop at a glance, plus battery health over time, cycles, temperature and time left.</p>
-        <ul class="does"><li>Read-only: it never changes a security setting</li><li>Each check opens the right Settings pane</li></ul>
+        <p class="what">Firewall, FileVault, Gatekeeper, SIP and AirDrop at a glance, a notice when a new program starts itself at login, plus battery health over time and a shortcut to macOS's charge limit.</p>
+        <ul class="does"><li>Read-only: it never changes a security setting</li><li>Each check opens the right Settings pane</li><li>Remove your own startup items in two clicks</li></ul>
       </article>
       <article class="skill">
-        <header><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 7h16M4 12h10M4 17h7"/></svg></span><h3>Apps and ports</h3></header>
-        <p class="what">See which apps use the most memory and quit them, find what is listening on :3000, and stop a forgotten dev server.</p>
-        <ul class="does"><li>macOS's own processes are never offered</li><li>⌃⌥⌘S opens Apple's screenshot and screen-video toolbar</li></ul>
+        <header><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M5 3l12 8-5 1 3 6-2 1-3-6-4 4z"/></svg></span><h3>Stay active</h3></header>
+        <p class="what">Slack, Teams, Zoom and other chat apps mark you away after a few idle minutes, even when the Mac is awake. Stay active moves the pointer one pixel when you've been idle, so they don't.</p>
+        <ul class="does"><li>Off by default; 2, 4 or 9 idle minutes</li><li>Never clicks or types, never with the lid closed</li><li>Asks for Accessibility only when you turn it on</li></ul>
+      </article>
+      <article class="skill">
+        <header><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 7h16M4 12h10M4 17h7"/></svg></span><h3>Apps, ports and storage</h3></header>
+        <p class="what">See which apps use the most memory and quit them, find what is listening on :3000, stop a forgotten dev server, and see which caches and Xcode folders fill your disk.</p>
+        <ul class="does"><li>macOS's own processes are never offered</li><li>A low-disk warning you set: 5 to 50 GB</li><li>Quick timer from the menu: 5 to 45 minutes</li><li>⌃⌥⌘S opens Apple's screenshot and screen-video toolbar</li></ul>
       </article>
     </div>
   </div>
@@ -532,7 +538,7 @@
     <h2>Pick what the summary shows.</h2>
     <p class="lede">Then switch tabs: Awake, Agents, Lid closed, Privacy, Security, Battery, Apps and Settings.</p>
     <div class="shots">
-      <figure><img src="img/menu-dark.jpg" width="680" height="1246" loading="lazy" alt="The Keepwatch menu: awake status, microphone and camera switches, keep-awake buttons, agent badges and lid-closed controls"><figcaption>The menu</figcaption></figure>
+      <figure><img src="img/menu-dark.jpg" width="680" height="1170" loading="lazy" alt="The Keepwatch menu: awake status, mic, camera and screen tiles, keep-awake buttons, a quick timer and laptop-closed controls"><figcaption>The menu</figcaption></figure>
       <figure><img src="img/dashboard-dark.jpg" width="1520" height="1440" loading="lazy" alt="Keepwatch dashboard: summary tiles for battery, health, agent sessions, microphone and camera above the tabs and keep-awake controls"><figcaption>The dashboard</figcaption></figure>
       <figure><img src="img/privacy-dark.jpg" width="1520" height="1440" loading="lazy" alt="Keepwatch Privacy tab: microphone switch, camera status with Turn off, alerts and a local history"><figcaption>Privacy</figcaption></figure>
     </div>
@@ -546,7 +552,7 @@
     <p class="lede">A bug in a power tool can leave a laptop sleepless in a bag, so the rules are strict.</p>
     <div class="principles">
       <div class="principle"><b>One privileged path</b><p>Only a lid session asks for your password, and only you can approve it. Never from a link or an agent.</p></div>
-      <div class="principle"><b>No permissions</b><p>No mic, camera, Accessibility, Screen Recording or Full Disk Access permission. No network requests.</p></div>
+      <div class="principle"><b>Nothing by default</b><p>No mic, camera, Screen Recording or Full Disk Access permission, and no network. Accessibility and the update check only if you turn them on.</p></div>
       <div class="principle"><b>Light</b><p>About 15 MB of memory and under 1% CPU. Native Swift and SwiftUI.</p></div>
       <div class="principle"><b>Open source</b><p>Apache-2.0, signed with a Developer ID and notarized by Apple.</p></div>
     </div>
@@ -563,7 +569,7 @@
       <details><summary>How do I keep my Mac awake while Claude Code or Codex is running?</summary><p>Turn on “While AI agents run”, or run <code>keepwatch awake --agents</code>. Agents can also wrap a single command with <code>keepwatch run -- &lt;command&gt;</code>.</p></details>
       <details><summary>Is it safe to keep a MacBook awake with the lid closed in a bag?</summary><p>Heat in a closed bag is the main risk, so lid sessions only start on power or on battery above 20%, end on serious thermal pressure or at 20% battery, are capped at 12 hours, and every launch checks that sleep was not left off.</p></details>
       <details><summary>How is Keepwatch different from caffeinate or Amphetamine?</summary><p><code>caffeinate</code> can't keep a Mac awake with the lid closed, and Amphetamine needs a separate helper for that. Keepwatch knows when agent CLIs are running, ends lid sessions on its own, watches the mic and camera, and ships a CLI agents can call.</p></details>
-      <details><summary>Does Keepwatch need microphone or camera permission?</summary><p>No. It never records anything; it only asks macOS whether the microphone or camera is running.</p></details>
+      <details><summary>Does Keepwatch need microphone or camera permission?</summary><p>No. It never records anything; it only asks macOS whether the microphone or camera is running. It asks for Accessibility only if you turn on Stay active, and goes online only if you turn on the update check.</p></details>
     </div>
     <p class="proof-note">Lid-closed sessions are in beta. Read exactly what runs with administrator rights in <a href="https://github.com/AgentSkillDeck/keepwatch/blob/main/SECURITY.md">SECURITY.md</a>.</p>
   </div>
@@ -586,7 +592,7 @@
 
 <footer>
   <div class="wrap">
-    <span>Keepwatch is part of <a href="/">AgentSkillDeck</a> · Apache-2.0 · <a href="https://github.com/AgentSkillDeck/keepwatch/releases/latest">v0.2.0</a></span>
+    <span>Keepwatch is part of <a href="/">AgentSkillDeck</a> · Apache-2.0 · <a href="https://github.com/AgentSkillDeck/keepwatch/releases/latest">v0.3.0</a></span>
     <span><a href="https://github.com/AgentSkillDeck/keepwatch/blob/main/SECURITY.md">Security</a> · <a href="https://github.com/AgentSkillDeck/keepwatch">Source</a></span>
   </div>
 </footer>
